@@ -1,0 +1,83 @@
+.swiperUpload {
+    .picture-upload {
+        margin-bottom: 10px;
+        width: 126px;
+        height: 77px;
+        background: #FFFFFF;
+        border: 1px dashed #BFBFBF;
+        color: #B3B3B3;
+        border-radius: 2px;
+    }
+    .picture-upload-success {
+        margin-bottom: 10px;
+        position: relative;
+        width: 126px;
+        height: 77px;
+        color: #B3B3B3;
+        background: #ccc;
+        border-radius: 2px;
+        .picture-upload-filter {
+            display: none;
+        }
+        .picture-upload-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 2px;
+            object-fit: cover;
+        }
+    }
+    .picture-upload-success:hover {
+        .picture-upload-filter {
+            position: absolute;
+            top: 0px;
+            background-color: rgba(0,0,0,0.4);
+            width: 100%;
+            height: 100%;
+            border-radius: 2px;
+            display: flex;
+            .picture-upload-delete {
+                color: #FFFFFF;
+                font-size: 19px;
+            }
+            .upload-filter-size {
+                color: #FFFFFF;
+                line-height: 78px;
+                margin-left: 30px;
+                width: 72px;
+            }
+        }
+
+    }
+
+
+
+    .picture-upload-video {
+        font-size: 28px;
+    }
+    .picture-upload-camera {
+        font-size: 32px;
+    }
+    .picture-upload:hover {
+        border-color: #FF6146;
+        color: #FF6146;
+        .text_dec {
+            color: #FF6146;
+        }
+    }
+    .split-line {
+        margin-top: 20px;
+        width: 2px;
+        height: 40px;
+        background-color: #999;
+        margin-right: 10px;
+    }
+}
+
+.target {
+    width: 200px;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+    border: 1px solid gray;
+    color: red;
+}

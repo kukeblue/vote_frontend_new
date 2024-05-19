@@ -1,0 +1,31 @@
+.apply-page {
+    background-color: #fff;
+    padding-bottom: 5rem;
+    .adm-form-item-label {
+        font-size: 0.37rem !important;
+    }
+}
+.adm-form-item-feedback-error {
+    font-size: 0.34rem;
+}
+
+.custom-form-item {
+    display: flex;
+    align-items: center; /* 确保标签和控件垂直居中 */
+}
+
+.custom-form-item .am-list-line {
+    flex: 1; /* 控件占据剩余空间 */
+}
+
+.custom-form-item .am-list-content {
+    flex-basis: 100px; /* 标签宽度 */
+    flex-shrink: 0;
+}
+
+/* 覆盖禁用状态的样式，使用 !important 提高优先级 */
+.am-button-disabled, .am-button-disabled:hover {
+    background-color: #108ee9 !important; /* 这里使用原来的背景颜色 */
+    color: #fff !important; /* 这里使用原来的文字颜色 */
+    opacity: 1 !important; /* 确保不透明度为1 */
+}

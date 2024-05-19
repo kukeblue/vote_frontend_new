@@ -1,0 +1,198 @@
+.accountUpgrade-page {
+    margin-top: 30px;
+    background-color: #FFFFFF;
+    padding: 30px;
+    padding-top: 0px;
+    // box-sizing: border-box;
+    .accountUpgrade-accountType {
+        .accountType-card {
+            margin: 5px;
+            width: 245px;
+            min-height: 320px;
+            margin-bottom: 10px;
+            .ant-card-body {
+                padding: 0px !important;
+            }
+        }
+        
+        .accountType-card-header {
+            overflow: hidden;
+            position: relative;
+            padding: 20px;
+            width: 100%;
+            height: 170px;
+            background-color: #0BBA97;
+            .accountType-card-title  {
+                font-size: 24px;
+                font-weight: 400;
+                color: #FFFFFF;
+                line-height: 42px;
+            }
+            .accountType-card-price {
+                margin-top: 15px;
+                color: #FFFFFF;
+            }
+            .accountType-card-discountPrice {
+                margin-top: 10px;
+                color: #FFFFFF;
+                font-size: 16px;
+            }
+        }
+       
+        .accountType-card-body {
+            padding-bottom: 16px;
+            border: 1px solid transparent;
+            .open-title-1 {
+                margin-top: 10px;
+                font-size: 16px;
+                font-weight: 400;
+                color: #0BBA97;
+                line-height: 42px;
+            }
+            .open-button {
+                margin-top: 20px;
+                width: 200px;
+                height: 30px;
+                border: 1px solid #BFBFBF;
+                color: #898989;
+                background-color: #FFFFFF;
+            }
+            .open-button-selected-1 {
+                .open-button();
+                background-color: #FF6B01;
+                border: 0px;
+                color: #FFFFFF;
+            }
+        }
+        .accountType-card-spread {
+            height: 520px;
+            .accountType-card-body {
+                height: 350px;
+            }
+        }
+        .function-list {
+            margin-bottom: 20px;
+            width: 180px;
+            padding-top: 20px;
+            .support-text {
+                color: #87d068;
+            }
+        }
+    }
+    .spread-icon {
+        font-size: 30px;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+    .spread-icon_rotate {
+        font-size: 30px;
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+    }
+}
+
+.top-left-triangle {
+    width: 58%;
+    height: 58%;
+    background-color: #ED424E;
+    transform: rotate(-45deg);
+    position: absolute;
+    left: -35%;
+    top: -35%;
+    p {
+        position: absolute;
+        left: 51%;
+        bottom: -11px;
+        color: #FFFFFF;
+        font-size: 13px;
+        transform: translateX(-50%);
+    }
+}
+
+.account-payform {
+    margin-left: 5px;
+    .account-payform-label {
+        margin-right: 20px;
+        font-size: 16px;
+    }
+    .account-payform-text {
+        font-size: 16px;
+    }
+    
+    .pay-type {
+        margin-bottom: 20px;
+        cursor: pointer;
+        margin-right: 20px;
+        width: 210px;
+        height: 65px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        .pay-type-time {
+            background-color: #F0F0F0;
+            width: 80px;
+            height: 100%;
+            border-radius: 0px 5px 5px 0px;
+            color: #666;
+        }
+        .pay-type-price {
+            height: 100%;
+            .price {
+                color: #FF6B01;
+                font-size: 20px;
+            }
+            .discount-price {
+                text-decoration:line-through;
+                font-size: 14px;
+                color: #999;
+            }
+        }
+    }
+    .pay-type:hover {
+        border: 1px solid #FF6B01;
+    }
+    .pay-type-selected {
+        .pay-type();
+        border: 1px solid #FF6B01;
+    }
+    
+}
+.pay-button {
+    width: 150px;
+    height: 45px;
+    margin-top: 50px;
+    margin-left: 90px;
+}
+
+
+/* ipad pro */
+@media screen and (max-width: 1024px) {
+   
+}
+/* ipad */
+@media screen and (max-width: 768px) {
+    .accountUpgrade-page {
+        margin: 0px !important;
+    }
+}
+/* iphone6 7 8 plus */
+@media screen and (max-width: 414px) {
+    
+}
+/* iphoneX */
+@media screen and (max-width: 375px) and (-webkit-device-pixel-ratio: 3) {
+
+}
+/* iphone6 7 8 */
+@media screen and (max-width: 375px) and (-webkit-device-pixel-ratio: 2) {
+
+}
+/* iphone5 */
+@media screen and (max-width: 320px) {
+
+}

@@ -1,0 +1,47 @@
+
+.rank-list .rank-list-item {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 2;
+}
+
+.rank-list .rank-list-item:first-child {
+    background-image: url('https://upload.cyuandao.com/2023091810191167610.png');
+    .rank-list-item-icon {
+        background-image: url('https://upload.cyuandao.com/2023091810342842866.png');
+    }
+}
+
+.rank-list .rank-list-item:nth-child(2) {
+    background-image: url('https://upload.cyuandao.com/2023092109181456122.png');
+    .rank-list-item-icon {
+        background-image: url('https://upload.cyuandao.com/2023092109061367709.png');
+    }
+}
+
+.rank-list .rank-list-item:nth-child(3) {
+    background-image: url('https://upload.cyuandao.com/2023092109181819085.png');
+    .rank-list-item-icon {
+        background-image: url('https://upload.cyuandao.com/2023092109061526269.png');
+    }
+}
+
+.rank-list-item-icon {
+    width: 0.5rem;
+    height: 0.54rem;
+    // background-image: url('https://upload.cyuandao.com/2023091810342842866.png');
+    background-size: 100% 100%;
+}
+
+.rank-list::before {
+    position: absolute;
+    top: -1.50rem;
+    left: 0.1667rem;
+    content: " ";
+    width: 1.8667rem;
+    height: 2.3067rem;
+    background: url(https://upload.cyuandao.com/2023091810262861809.png) no-repeat center;
+    background-size: 100%;
+    z-index: 1;
+}

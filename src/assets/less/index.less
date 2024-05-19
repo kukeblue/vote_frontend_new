@@ -1,0 +1,75 @@
+
+html {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  // overflow: hidden;
+}
+
+#root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+div {
+  font-size: 0.4rem;
+}
+
+:root {
+  --primary-color: #0f7dec;
+}
+
+
+.adm-input-element::placeholder {
+  font-size: 0.37rem !important;
+}
+
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  /*! autoprefixer: off */
+  -webkit-box-orient: vertical;
+  /* autoprefixer: on */
+}
+
+.text-ellipsis-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  /*! autoprefixer: off */
+  -webkit-box-orient: vertical;
+  min-height: 1.05rem;
+  text-align: center;
+  /* autoprefixer: on */
+}
+
+.text-ellipsis-1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  /*! autoprefixer: off */
+  -webkit-box-orient: vertical;
+  /* autoprefixer: on */
+  line-height: 0.7rem;
+  text-align: center;
+  min-height: 0.7rem;
+}
+
+@import './screen.less';
+@import './iconfont.less';

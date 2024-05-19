@@ -1,0 +1,148 @@
+@import '../../assets/less/mixin.less';
+.management-page {
+    padding-bottom: 100px;
+}
+.dashboard {
+    width: 100%;
+}
+.dashboard-card {
+    margin-bottom: 20px;
+    height: 75px;
+    background: #B3A896;
+    padding: 14px 24px;
+    margin: 0px 5px;
+    &-activityCount {
+        line-height: 30px;
+        font-size: 30px;
+        color: #FFFFFF;
+        margin-bottom: 5px;
+    }
+    &-activityDec {
+        font-size: 12px;
+        color: #FFFFFF;
+        line-height: 12px;
+    }
+}
+.dashboard-card:hover {
+    background: #ff6146;
+
+}
+.latestActivity {
+    margin-top: 29px;
+    background-color: #FFFFFF;
+    .latestActivity-header {
+        border-bottom: 1px solid #eee;
+        height: 49px;
+        width: 100%;
+        padding: 21px 11px;
+        font-size: 14px;
+        &-option-icon {
+            font-size: 14px;
+            margin-right: 3px;
+        }
+        &-option-votemange {
+            width: 86px;
+            height: 25px;
+            border: 1px solid #eee;
+            font-size: 12px;
+            cursor: default;
+        }
+        &-option-create {
+            width: 86px;
+            height: 25px;
+            background: #FF6146;
+            color: #FFFFFF;
+            font-size: 12px;
+            cursor: default;
+        }
+    }
+    
+}
+.management-table-title {
+    width: 300px;
+}
+.setting-dashboard-card {
+    flex: 1;
+    height: 106px;
+    background: #FFFFFF;
+    padding: 0px 27px;
+    .setting-dashboard-card-title {
+        font-size: 13px;
+        color: #3E3A39;
+    }
+    .setting-dashboard-card-button {
+        min-width: 104px;
+        height: 31px;
+        background: #FF6146;
+        border-radius: 3px;
+        color: #FFFFFF;
+    }
+}
+.article-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 32px;
+    width: 100%;
+    background-color: #FFFFFF;
+    .article-block-column {
+        width: 550px;
+        padding: 21px 32px;
+    }
+    .article-block-column-header {
+        
+    }
+    .article-block-column-header-title {
+        font-size: 22px;
+        font-weight: bold;
+        color: #3E3A39;
+    }
+    .article-block-column-header-title::before {
+        content: " ";
+        width: 5px;
+        height: 25px;
+        background-color: #FF6146;
+        display: inline-block;
+        margin-right: 5px;
+    }
+    .article-block-seemore {
+        .mixin-seeMore-button()
+    }
+    .acticle-list-item {
+        height: 51px;
+        border-bottom: 1px dashed #ccc;
+        // background: linear-gradient(white,white) padding-box,
+        // repeating-linear-gradient(-45deg,#ccc 0, #ccc 0.3em,white 0,white 0.7em);
+    }
+   
+}
+
+/* ipad pro */
+@media screen and (max-width: 992px) {
+    .setting-dashboard-card {
+        padding: 0 10px !important;
+    }
+    .article-block-column {
+        padding: 21px 10px !important;
+    }
+}
+/* ipad */
+@media screen and (max-width: 768px) {
+    
+}
+/* iphone6 7 8 plus */
+@media screen and (max-width: 414px) {
+    
+}
+/* iphoneX */
+@media screen and (max-width: 375px) and (-webkit-device-pixel-ratio: 3) {
+
+}
+/* iphone6 7 8 */
+@media screen and (max-width: 375px) and (-webkit-device-pixel-ratio: 2) {
+
+}
+/* iphone5 */
+@media screen and (max-width: 320px) {
+
+}
