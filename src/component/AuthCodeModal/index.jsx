@@ -13,12 +13,23 @@ export default function AuthCodeModal({
 
     const [captchaCode, setCaptchaCode] = useState()
     const setAuthCodeModal = usePlayerStore((state) => state.setAuthCodeModal)
+    const doVoteCancel = usePlayerStore((state) => state.doVoteCancel)
+
+    
     const doVoteConfirm = usePlayerStore((state) => state.doVoteConfirm)
-    const setShowVoteResult = usePlayerStore((state) => state.setShowVoteResult)
+    const vote_type = useSettingStore((state) => state.activitySetting.vote_type.values)
+
     const activityId = useSettingStore((state) => state.activityId)
+    let isSingleVote;
+    if(vote_type == 1) {
+        isSingleVote = true
+    }else {
+        isSingleVote = false
+    }
 
     const handleOk = () => {
-        doVoteConfirm({ activityId, captchaId, code })
+       
+        doVoteConfirm({ activityId, captchaId, code, isSingleVote })
         setAuthCodeModal(false);
         // setShowVoteResult(true)
     }
@@ -51,7 +62,7 @@ export default function AuthCodeModal({
                     {captchaCode && <img src={captchaCode}></img>}
                 </div>
             </div>
-            <div onClick={() => setAuthCodeModal(false)} className="authCodeModal-options flex-between"><div className="authCodeModal-options_cancel flex-center">
+            <div onClick={() => doVoteCancel({isSingleVote})} className="authCodeModal-options flex-between"><div className="authCodeModal-options_cancel flex-center">
                 取消
             </div> <div onClick={() => { handleOk() }} className="authCodeModal-options_ok flex-center">
                     确定

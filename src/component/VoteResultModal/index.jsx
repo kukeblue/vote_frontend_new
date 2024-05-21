@@ -13,7 +13,15 @@ export default function VoteResultModal({
     const voteResult = usePlayerStore((state) => state.voteResult)
     const setShowVoteResult = usePlayerStore((state) => state.setShowVoteResult)
     const doVoteCancel = usePlayerStore((state) => state.doVoteCancel)
+    const vote_type = useSettingStore((state) => state.activitySetting.vote_type.values)
 
+    const activityId = useSettingStore((state) => state.activityId)
+    let isSingleVote;
+    if(vote_type == 1) {
+        isSingleVote = true
+    }else {
+        isSingleVote = false
+    }
     
     
 
@@ -27,7 +35,7 @@ export default function VoteResultModal({
                 <img className="w-full h-auto min-h-12" src="https://upload.cyuandao.com/2020082010520010820.jpg"></img>
             </div>
             <div onClick={()=>{
-                doVoteCancel()
+                doVoteCancel({isSingleVote})
             }} className='text-primary w-full flex items-center justify-center h-6 text-title_large'>关闭</div>
         </div>
     </div>

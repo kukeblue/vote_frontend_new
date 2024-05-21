@@ -30,10 +30,13 @@ export default function VotePlayerList({
 
     const players = usePlayerStore((state) => state.players)
     const activityId = useSettingStore((state) => state.activityId)
+    const vote_type = useSettingStore((state) => state.activitySetting.vote_type.values)
+
     const style = useSettingStore((state) => state.style)
     const loading = usePlayerStore((state) => state.loading)
     const total = usePlayerStore((state) => state.total)
     const page = usePlayerStore((state) => state.page)
+    
 
     const defaultPlayerCover = useSettingStore((state) => state.activitySetting.default_player_cover.values)
     const colCount = useSettingStore((state) => state.activitySetting.vote_item_column_type.values)
@@ -70,7 +73,13 @@ export default function VotePlayerList({
     }
 
     const handleClickVote = (item) => {
-        doVoteHandle({ activityId, player: item })
+        let isSingleVote;
+        if(vote_type == 1) {
+            isSingleVote = true
+        }else {
+            isSingleVote = false
+        }
+        doVoteHandle({ activityId, player: item, isSingleVote})
     }
 
     const handleClickPlayer = (id) => {
@@ -88,7 +97,7 @@ export default function VotePlayerList({
     const renderItem = (item) => {
         const isSelectedPlayer = checkIsSelectedPlayer(item.id)
         return <div className={`${isleftRightStruct ? "flex" : ""} w-full h-full bg-white rounded-10px  relative`}>
-            {showVoteItemNo && <div className=' text-white rounded-tl-8px rounded-br-8px bg-masking px-5px w-1rem text-center py-2px text-base absolute left-0 top-0'>{item.number}号</div>}
+            {showVoteItemNo && <div className=' text-white rounded-tl-8px rounded-br-8px bg-masking px-5px min-w-1rem text-center py-2px text-base absolute left-0 top-0'>{item.number}号</div>}
             {showVoteItemCover && style == 2 &&
                 <img
                     style={{ height: `${voteItemArrayType == 1 ? `${10 / colCount}rem` : "auto"}` }}

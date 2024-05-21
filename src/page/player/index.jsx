@@ -46,6 +46,7 @@ export default () => {
   const navigate = useNavigate()
   const canvass_title = useSettingStore((state) => state.activitySetting.canvass_title.values)
   const vote_item_pic_array_type = useSettingStore((state) => state.activitySetting.vote_item_pic_array_type.values)
+  const vote_type = useSettingStore((state) => state.activitySetting.vote_type.values)
 
   // console.log('选手图片排列放手', vote_item_pic_array_type)
 
@@ -75,7 +76,13 @@ export default () => {
 
 
   const handleClickVote = (item) => {
-    doVoteHandle({ activityId, player: item })
+    let isSingleVote;
+    if(vote_type == 1) {
+        isSingleVote = true
+    }else {
+        isSingleVote = false
+    }
+    doVoteHandle({ activityId, player: item, isSingleVote })
   }
 
   const checkIsSelectedPlayer = (id) => {

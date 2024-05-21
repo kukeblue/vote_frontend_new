@@ -269,7 +269,7 @@ export default () => {
 							{applyResult ? applyResult[item.name] :
 								<Radio.Group >
 									<Space direction='vertical'>
-										{item.options.map(item => {
+										{item.options && item.options.map(item => {
 											return <Radio key={item} value={item}>{item}</Radio>
 										})}
 									</Space>

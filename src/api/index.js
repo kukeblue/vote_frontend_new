@@ -4,6 +4,16 @@ import { JSEncrypt } from "js-encrypt"
 
 
 
+// 获取jsdk参数
+export function fetchWeChatSahreData() {
+    return post({
+        url: '/api/wechat/share',
+        data: {
+            url:  decodeURIComponent(location.href)
+        }
+    })
+}
+
 
 // 查看授权是否过期
 export function fetchUserLogin(openid) {

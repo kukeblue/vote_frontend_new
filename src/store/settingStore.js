@@ -18,7 +18,7 @@ const useSettingStore = create((set) => (
       topic_bg_pic: { values: '' },
       banners: { values: [] },
       text_notice: { values: '' },
-      vote_type: { values: 0 },   // 单选 多选
+      vote_type: { values: 1 },   // 单选 多选
       vote_times_limit_type: { values: 1 }, // 投票周期 1:固定次数  2:周期次数
       can_vote_same_item_num: { values: 1 }, // 周期内可以投几次
       min_choose_num: { values: 1 }, // 最少选择选手
@@ -158,8 +158,6 @@ const useSettingStore = create((set) => (
     setOpenid: (v) => set(() => ({ openid: v })),
     setActivityData: (v) => set(() => ({ activityData: v })),
     setTimeData: (v) => set(() => ({ timeData: v })),
-
-
 
     setActivitySetting: (v) => set(() => ({ activitySetting: v })),
     getActivitySetting: async (domain) => {
