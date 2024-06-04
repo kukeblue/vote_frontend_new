@@ -7,6 +7,7 @@ import useSettingStore from './settingStore'
 
 const usePlayerStore = create((set, get) => (
 	{
+		
 		searchTxt: '',
 		groups: [],
 		selectedGroup: { id: 'all', name: '全部' },

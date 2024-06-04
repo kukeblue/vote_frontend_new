@@ -37,6 +37,8 @@ export default function VoteGroupCard({
         }
     }
 
+    console.log('groups', groups)
+
     return showGroup && <div className='w-full pl-15px pr-15px pt-10px'>
         <div className=' bg-white w-full rounded-10px px-15px py-15px '>
             <Grid columns={voteItemGroupColumn} gap={8}>
@@ -47,7 +49,9 @@ export default function VoteGroupCard({
                     }
                     return item && <Grid.Item onClick={()=>handleChangeGroup(item)} key={item.id}  className='w-full'>
                     <div key={item.id} 
-                        className={`${selectedGroup && (item.id == selectedGroup.id) ? 'bg-primary text-white' : 'text-primary'}  border border-primary mx-5px text-center text-base px-15px py-5px rounded-15px `}>
+                        className={`${selectedGroup && (item.id == selectedGroup.id) ? 'bg-primary text-white' : 'text-primary'}  
+                        overflow-hidden whitespace-nowrap text-overflow-ellipsis 
+                        border border-primary mx-5px text-center text-base px-15px py-5px rounded-15px `}>
                         {
                         item.name
                     }</div></Grid.Item>

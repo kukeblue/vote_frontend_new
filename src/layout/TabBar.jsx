@@ -11,22 +11,53 @@ import {
 } from '@ant-design/icons';
 const pageData = ["intro", "vote", "rank", "apply"]
 
+const tabIconMap = {
+    introduce: "iconactivity",
+    poll: "iconaddressbook",
+    rank: "iconranking",
+    enroll: "iconvote"
+}
+
+const tabIconNameMap = {
+    introduce: "intro",
+    poll: "vote",
+    rank: "rank",
+    enroll: "apply",
+}
 
 export default function TabBar() {
     const searchTxt = usePlayerStore((state) => state.searchTxt)
     const setSearchTxt = usePlayerStore((state) => state.setSearchTxt)
     const getPlayers = usePlayerStore((state) => state.getPlayers)
     const activityId = useSettingStore((state) => state.activityId)
-
-
+    const topicMenu = useSettingStore((state) => state.activitySetting.topic_menu.values)
+    console.log('topicMenu', topicMenu)
+    const tabs = topicMenu.filter(item => item.checked)
     const navigate = useNavigate();
     const href = location.href
-    const pageType = pageData.find(item => {
-        return href.includes(item)
+    let pageType = ''
+    let pathType = ''
+
+    pageData.forEach(item => {
+        const path = href.includes(item)
+        if (path) {
+            pathType = item
+        }
+        if (path && item == 'intro') {
+            pageType = 'introduce'
+        } else if (path && item == 'vote') {
+            pageType = 'poll'
+        } else if (path && item == 'rank') {
+            pageType = 'rank'
+        } else if (path && item == 'apply') {
+            pageType = 'enroll'
+        }
     })
+    console.log('pageType', pageType)
 
     const handleChangeTab = (v) => {
-        navigate(v)
+        console.log('handleChangeTab', v)
+        navigate("/" + v)
         // var divElement = document.getElementsByClassName("page")[0];
         // divElement.scrollTop = 0
     }
@@ -40,6 +71,12 @@ export default function TabBar() {
         getPlayers(activityId, 1)
         Modal.clear()
 
+    }
+    
+    const handleClickCustom = (item) => {
+        if(item.link) {
+            location.href = item.link
+        }
     }
 
     const handleClickSearch = () => {
@@ -64,28 +101,33 @@ export default function TabBar() {
     }
 
     return <div className='pt-10px w-full h-1.8rem bg-white tab-bar absolute bottom-0 left-0 px-0.2rem'>
-        <Grid columns={5} gap={8}>
-            <Grid.Item className='flex flex-col items-center'>
-                <div onClick={() => handleChangeTab('/intro')} className={`text-primary text-icon_tab leading-icon_tab iconfont iconactivity${pageType == 'intro' ? '_fill' : ''}`}></div>
-                <div onClick={() => handleChangeTab('/intro')} className='text-base text-primary'>介绍</div>
-            </Grid.Item>
-            <Grid.Item className='flex flex-col items-center'>
-                <div onClick={() => handleChangeTab('/vote')}
-                    className={`text-primary text-icon_tab leading-icon_tab iconfont iconaddressbook${pageType == 'vote' ? '_fill' : ''}`}></div>
-                <div onClick={() => handleChangeTab('/vote')} className='text-base text-primary'>投票</div>
-            </Grid.Item>
-            <Grid.Item className='flex flex-col items-center'>
-                <div onClick={() => handleChangeTab('/rank')} className={`text-primary text-icon_tab leading-icon_tab iconfont iconranking${pageType == 'rank' ? '_fill' : ''}`}></div>
-                <div onClick={() => handleChangeTab('/rank')} className='text-base text-primary'>排行</div>
-            </Grid.Item>
-            <Grid.Item className='flex flex-col items-center'>
-                <div onClick={() => handleChangeTab('/apply')} className={`text-primary text-icon_tab leading-icon_tab iconfont iconvote${pageType == 'apply' ? '_fill' : ''}`}></div>
-                <div onClick={() => handleChangeTab('/apply')} className='text-base text-primary'>报名</div>
-            </Grid.Item>
-            <Grid.Item className='flex flex-col items-center'>
-                <div onClick={handleClickSearch} className='text-primary text-icon_tab leading-icon_tab iconfont iconsearch'></div>
-                <div onClick={handleClickSearch} className='text-base text-primary'>搜索</div>
-            </Grid.Item>
+        <Grid columns={tabs.length} gap={8}>
+            {
+                tabs.map(item => {
+
+                    if (item.code == 'search') {
+                        return <Grid.Item className='flex flex-col items-center'>
+                            <div onClick={handleClickSearch} className='text-primary text-icon_tab leading-icon_tab iconfont iconsearch'></div>
+                            <div onClick={handleClickSearch} className='text-base text-primary'>搜索</div>
+                        </Grid.Item>
+                    }
+                    if (item.code == 'custom') {
+                        return <Grid.Item className='flex flex-col items-center'>
+                            <div onClick={()=>handleClickCustom(item)} className='text-primary text-icon_tab leading-icon_tab iconfont iconweixin'></div>
+                            <div onClick={()=>handleClickCustom(item)} className='text-base text-primary'>{item.name}</div>
+                        </Grid.Item>
+                    }
+
+                    return <Grid.Item key={item.code} className='flex flex-col items-center'>
+                        <div
+                            onClick={() => handleChangeTab(tabIconNameMap[item.code])}
+                            className={`text-primary text-icon_tab leading-icon_tab iconfont ${tabIconMap[item.code]}${pageType == item.code ? '_fill' : ''}`}></div>
+                        <div onClick={() => handleChangeTab(tabIconNameMap[item.code])} className='text-base text-primary'>{item.name}</div>
+                    </Grid.Item>
+                })
+            }
+
+
         </Grid>
     </div>
 }

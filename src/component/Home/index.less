@@ -1,0 +1,83 @@
+.home-button {
+    position: fixed;
+    z-index: 999;
+    top: 2rem;
+    left: 0;
+    width: 1.4rem;
+    height: 1.5rem;
+    background: rgba(255, 255, 255, .95);
+    -webkit-box-shadow: 0 .02rem .16rem 0 rgba(0, 0, 0, .1);
+    box-shadow: 0 .02rem .16rem rgba(0, 0, 0, .1);
+    border-radius: 0 .2rem .2rem 0;
+    text-align: center;
+    .home-button-text {
+        width: 1rem;
+        font-size: .36rem;
+        color: #333;
+        text-align: center;
+        font-weight: 600;
+    }
+    .iconhome_fill {
+        color: #fff;
+        font-size: 0.62rem;
+    }
+    .home-button-jiantou {
+        width: 0.3rem;
+        height: 1rem;
+        // background-color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+
+@-webkit-keyframes MoveToRight-51b3babf {
+    0% {
+        translate: -1.1rem
+    }
+
+    to {
+        translate: 0
+    }
+}
+
+@keyframes MoveToRight-51b3babf {
+    0% {
+        translate: -1.1rem
+    }
+
+    to {
+        translate: 0
+    }
+}
+
+@-webkit-keyframes MoveToLeft-51b3babf {
+    0% {
+        translate: 0
+    }
+
+    to {
+        translate: -1.1rem
+    }
+}
+
+@keyframes MoveToLeft-51b3babf {
+    0% {
+        translate: 0
+    }
+
+    to {
+        translate: -1.1rem
+    }
+}
+
+.box-expand {
+    animation: MoveToRight-51b3babf .7s;
+    animation-fill-mode: forwards;
+}
+
+.box-folder {
+    animation: MoveToLeft-51b3babf .7s;
+    animation-fill-mode: forwards;
+}

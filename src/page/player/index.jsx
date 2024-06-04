@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import './index.less'
-import { getActivityPlayerInfo } from '../../api/index'
+import { addActivityPlayerVisits, getActivityPlayerInfo } from '../../api/index'
 import useSettingStore from '../../store/settingStore'
 import usePlayerStore from '../../store/playerStore'
 
@@ -57,7 +57,8 @@ export default () => {
 
   useEffect(() => {
     if (activityId) {
-      getActivityPlayerInfo(activityId, params.get("id")).then(res => {
+        addActivityPlayerVisits(activityId, params.get("id"))
+        getActivityPlayerInfo(activityId, params.get("id")).then(res => {
         // console.log(res.data.info)
         setPlayerInfo(res.data.info)
       })
@@ -77,10 +78,10 @@ export default () => {
 
   const handleClickVote = (item) => {
     let isSingleVote;
-    if(vote_type == 1) {
-        isSingleVote = true
-    }else {
-        isSingleVote = false
+    if (vote_type == 1) {
+      isSingleVote = true
+    } else {
+      isSingleVote = false
     }
     doVoteHandle({ activityId, player: item, isSingleVote })
   }
@@ -88,10 +89,10 @@ export default () => {
   const checkIsSelectedPlayer = (id) => {
     const index = selectedPlayers.findIndex(item => item.id === id);
     if (index === -1) {
-        return false
+      return false
     }
     return true
-}
+  }
 
   return <div className='overflow-hidden player-page w-full  p-15px'>
     <div onClick={() => {
@@ -118,7 +119,7 @@ export default () => {
       {show_number_in_detail && <div className='text-center'>{playerInfo.number}号</div>}
       {show_vote_item_name_in_detail && <div className='text-common text-center mt-0.01rem'>{playerInfo.name}</div>}
 
-      {show_vote_item_cover_in_detail && (!playerInfo.thrumbs || playerInfo.thrumbs.length == 0) && <Image src={playerInfo.cover && getImageByCode(playerInfo.cover)} className='player-pic h-10rem bg-gray-200 rounded-10px mt-20px ml-5px mr-5px'></Image>}
+      {show_vote_item_cover_in_detail && (!playerInfo.thrumbs || playerInfo.thrumbs.length == 0) && <Image src={playerInfo.cover && getImageByCode(playerInfo.cover)} className='player-pic h-auto bg-gray-200 rounded-10px mt-20px ml-5px mr-5px'></Image>}
       <div>
         {/* 选手照片 */}
         {show_vote_item_cover_in_detail && vote_item_pic_array_type == 1 && <Swiper

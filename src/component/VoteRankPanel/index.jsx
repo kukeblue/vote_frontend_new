@@ -6,6 +6,7 @@ import useSettingStore from '../../store/settingStore'
 import { useEffect } from 'react'
 import {getImageByCode} from '../../utils/format'
 import { useNavigate } from 'react-router'
+import { Grid, InfiniteScroll } from 'antd-mobile'
 
 
 export default function VoteIntroPanel({
@@ -19,10 +20,8 @@ export default function VoteIntroPanel({
     const getRanks = usePlayerStore((state) => state.getRanks)
     const ranks = usePlayerStore((state) => state.ranks)
     const selectedGroupInRank = usePlayerStore((state) => state.selectedGroupInRank)
-
     const [ page,  setPage] = useState(1)
     const [ viewRanks,  setViewRanks] = useState([])
-
     const defaultPlayerCover = useSettingStore((state) => state.activitySetting.default_player_cover.values)
 
 
@@ -80,12 +79,13 @@ export default function VoteIntroPanel({
                             <div className='text-common ml-5px relative bottom-1px'>{player.name}</div>
                         </div>
                         { showPlayerDec && <div className='flex'>
-                            <div className='text-small text-color_dec'>{player.introduction}</div>
+                            <div className='text-ellipsis-2 text-small text-color_dec'>{player.introduction}</div>
                         </div>}
                     </div>
                     <div className='text_color_type2'>{player.total_votes}票</div>
                 </div>})}
-                {hasMore && <div onClick={handleLoadMore} className='text-center w-full mt-1rem text-base '>加载更多</div> }
+                <InfiniteScroll loadMore={handleLoadMore} hasMore={hasMore} />
+                {/* {hasMore && <div onClick={handleLoadMore} className='text-center w-full mt-1rem text-base '>加载更多</div> } */}
             </div>
         </div>
     </div>

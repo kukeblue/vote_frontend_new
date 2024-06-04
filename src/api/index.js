@@ -4,6 +4,27 @@ import { JSEncrypt } from "js-encrypt"
 
 
 
+// 添加活动访问数
+export function addActivityVisits(activity_id) {
+    return post({
+        url: '/api/activity/add_activity_visits/' + activity_id,
+        data: {
+        }
+    })
+}
+
+// 添加选手访问数
+export function addActivityPlayerVisits(activity_id, id) {
+    return post({
+        url: '/api/activity/add_activity_player_visits',
+        data: {
+            activity_id,
+            id
+        }
+    })
+}
+
+
 // 获取jsdk参数
 export function fetchWeChatSahreData() {
     return post({

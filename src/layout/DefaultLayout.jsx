@@ -20,8 +20,9 @@ import { useLocation } from 'react-router-dom';
 import AuthCodeModal from '../component/AuthCodeModal'
 import VoteResultModal from '../component/VoteResultModal'
 import utils from '../utils/common';
-import { fetchUserLogin, fetchWeChatSahreData } from '../api';
+import { addActivityVisits, fetchUserLogin, fetchWeChatSahreData } from '../api';
 import MultiVoteFloatPanel from '../component/MultiVoteFloatPanel';
+import HomeButton from '../component/Home';
 
 function UserLayout(props) {
   const getActivitySetting = useSettingStore((state) => state.getActivitySetting)
@@ -47,13 +48,13 @@ function UserLayout(props) {
     const hostname = window.location.hostname;
     const parts = hostname.split('.');
 
-
     if (parts.length >= 2) {
       const secondLevelDomain = parts[0];
       console.log('获取最后两个部分作为二级域名', secondLevelDomain)
       domain = secondLevelDomain;
     } else {
       domain = 'yymot'
+      // domain = 'o3nygq'
     }
   }
 
@@ -63,9 +64,17 @@ function UserLayout(props) {
   const isWeChat = isWeChatClient()  // 是否是微信客户端
 
   useEffect(() => {
-    setDomain(domain)
     getActivitySetting(domain)
   }, [domain])
+
+
+  useEffect(() => {
+    if(activityId) {
+      addActivityVisits(activityId)
+    }
+  }, [activityId])
+
+
 
   useEffect(() => {
     if (location.pathname != '/vote') {
@@ -108,6 +117,7 @@ function UserLayout(props) {
     <div style={{ backgroundImage: `url(${getImageByCode(topicBgPic)})` }} className='bg-size-[100%_100%] overflow-hidden bg-page defaultLayout w-full h-full relative'>
       {showAuthCodeModal && <AuthCodeModal></AuthCodeModal>}
       <VoteResultModal></VoteResultModal>
+      <HomeButton></HomeButton>
       <Notice></Notice>
       <Flotage></Flotage>
       <MusicPlayer></MusicPlayer>
@@ -116,7 +126,7 @@ function UserLayout(props) {
       <div id="page-main" className={`page w-full h-full flex flex-col ${showAuthorizationLayer ? 'overflow-hidden' : 'overflow-y-auto'} `}>
         <SwiperImage></SwiperImage>
         <div className='page-main flex-1'>
-          {props.children}
+          <Outlet/>
           {location.pathname != '/apply' && <TechnicalSupport />}
         </div>
       </div>
