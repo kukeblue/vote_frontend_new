@@ -37,7 +37,7 @@ export default function VoteSearchCard({
                    
                    {searchTxt && <CloseCircleOutlined 
                    onClick={()=>{
-                     setSearchTxt('')
+                     setSearchTxt()
                    }}
                    className="text-color_input_placeholder"/>}
                 </div>

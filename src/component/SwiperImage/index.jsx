@@ -9,11 +9,10 @@ const colors = ['#ace0ff']
 export default function SwiperImage() {
 
     const banners = useSettingStore((state) => state.activitySetting.banners.values) || []
-
     
     const activitySetting = useSettingStore((state) => state.activitySetting)
 
-    // console.log('【SwiperImage】', activitySetting.banners.values)
+
     const swiperConfig = {
         indicator: () => null
     }
@@ -35,7 +34,7 @@ export default function SwiperImage() {
             autoplay
             autoplayInterval={10000}
             onIndexChange={i => {
-                // // console.log(i, 'onIndexChange1')
+
             }}
         >
             {items}

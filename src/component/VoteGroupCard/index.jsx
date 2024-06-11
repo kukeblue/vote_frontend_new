@@ -14,7 +14,7 @@ export default function VoteGroupCard({
     showAll= true,
 }) {
     const groups = usePlayerStore((state) => state.groups)
-    // console.log('【VoteGroupCard】', groups)
+
     const activityId = useSettingStore((state) => state.activityId)
     const voteItemGroupColumn = useSettingStore((state) => state.activitySetting.vote_item_group_column.values)
 
@@ -28,16 +28,16 @@ export default function VoteGroupCard({
     }, [showAll, groups ])
 
     const handleChangeGroup = (item)=>{
-        // console.log('change group')
+
         onChangeGroup && onChangeGroup(item)
-        // console.log(item)
+
         setSelectedGroup(item)
         if(item.id != 'all') {
             getPlayers(activityId, 1, item.id)
         }
     }
 
-    console.log('groups', groups)
+
 
     return showGroup && <div className='w-full pl-15px pr-15px pt-10px'>
         <div className=' bg-white w-full rounded-10px px-15px py-15px '>

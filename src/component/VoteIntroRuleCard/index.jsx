@@ -40,7 +40,7 @@ export default function VoteIntroRuleCard({
     const [voteRuleMatching, setVoteRuleMatching] = useState()
 
     useEffect(() => {
-        // console.log('【获取vote_type】', activitySetting.vote_type.values)
+
         if (activitySetting.vote_type.values != 0) {
             let canVoteSameItemNum = activitySetting.can_vote_same_item_num.values
             const voteType = activitySetting.vote_type.values
@@ -48,7 +48,7 @@ export default function VoteIntroRuleCard({
                 let unit = activitySetting.vote_type.values == 1 ? '票' : '次'
                 let cycle = activitySetting.vote_times_limit_type.values == 1 ? '整个活动期间' : '每天'
                 let ruleText = `每个微信号${cycle}可以投${canVoteSameItemNum}${unit}`
-                // console.log('获取规则拼接：', ruleText)
+
                 setVoteRuleMatching(ruleText)
             } else {
                 let unit = activitySetting.vote_type.values == 1 ? '票' : '次'

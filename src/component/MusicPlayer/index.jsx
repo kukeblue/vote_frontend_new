@@ -7,7 +7,7 @@ export default function MusicPlayer() {
 
     const [isAudioPaly, setIsAudioPaly] = useState(true)
     const musicCode = useSettingStore((state) => state.activitySetting.music.values)
-    // console.log('【MusicPlayer】-> musicCode', musicCode)
+
 
     const autoSwitch = () => {
         if(isAudioPaly) {

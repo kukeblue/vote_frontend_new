@@ -2,9 +2,12 @@ import React from 'react'
 import './index.less'
 import usePlayerStore from '../../store/playerStore'
 import useSettingStore from '../../store/settingStore'
+import { useNavigate, useLocation } from "react-router-dom";
+
 import {Toast} from 'antd-mobile'
 
 export default function MultiVoteFloatPanel() {
+    const navigate = useNavigate();
 
     const selectedPlayers = usePlayerStore((state) => state.selectedPlayers)
     const doVoteHandle = usePlayerStore((state) => state.doVoteHandle)
@@ -38,7 +41,8 @@ export default function MultiVoteFloatPanel() {
         }else {
             isSingleVote = false
         }
-        doVoteHandle({isMultiVoteFloatPanelClick: true, isSingleVote})
+        navigate("/voting")
+        // doVoteHandle({isMultiVoteFloatPanelClick: true, isSingleVote})
     }
 
     return selectedPlayers.length > 0 && <div className='multi-vote-float-panel flex items-center text-base text-color_dec justify-between'>

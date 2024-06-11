@@ -59,7 +59,7 @@ export default () => {
 				images, info, name, video, ...others
 			} = values
 
-			console.log(values)
+
 
 			doApply(activityId, {
 				group_id: selectedGroup.id,
@@ -70,14 +70,14 @@ export default () => {
 				openid,
 				...others
 			}).then(res => {
-				console.log(res)
+
 				if (res.code == 0) {
 					Dialog.alert({
 						confirmText: "确认",
 						content: '提交报名成功',
 						onConfirm: () => {
 							fetchApplyStatus(activityId, openid).then(res => {
-								console.log('debug 查询报名状态成功', res)
+
 								if (res.code == 0) {
 									setApplyResult(res.data)
 								}
@@ -104,7 +104,7 @@ export default () => {
 	}
 
 	const handleSelectGroup = (v) => {
-		console.log('handleSelectGroup', v)
+
 		if (v && v[0]) {
 			let selectedGroup = groups.find(item => {
 				return item.id == v[0]
@@ -152,9 +152,9 @@ export default () => {
 			},
 			data: form,
 		};
-		console.log('【文件上传开始】');
+
 		let res = await axios(config);
-		console.log('【文件上传结束】', res);
+
 		if (res.status == 200) {
 			return {
 				url: getImageByCode(res.data.data.filename)
@@ -172,9 +172,9 @@ export default () => {
 
 	useEffect(() => {
 		if (activityId && openid) {
-			console.log('debug 查询报名状态')
+
 			fetchApplyStatus(activityId, openid).then(res => {
-				console.log('debug 查询报名状态成功', res)
+
 				if (res.code == 0) {
 					setApplyResult(res.data)
 				}
@@ -212,7 +212,7 @@ export default () => {
 				style={{ '--border-bottom': '0px' }}>
 				{applyResult && <Form.Item layout='horizontal' label='报名状态'>
 					<div className='flex items-center justify-between '>
-						<Input placeholder='' />
+						<Input placeholder= ''/>
 						<Button
 							color="warning"
 							size='small'

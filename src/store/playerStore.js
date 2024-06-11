@@ -31,16 +31,21 @@ const usePlayerStore = create((set, get) => (
 		},
 		getGroups: async (activityId) => {
 			const response = await fetchActivityGroups(activityId)
-			// console.log('获取活动分组：', response.data)
+
 			set({
 				groups: [{ id: 'all', name: '全部' }].concat(response.data),
 			})
 		},
 		getRanks: async (activityId) => {
 			const response = await fetchActivityRanks({ activity_id: activityId })
-			// console.log('获取renk：', response.data)
+
 			set({
 				ranks: response.data,
+			})
+		},
+		setSelectedPlayers:(selectedPlayers) => {
+			set({
+				selectedPlayers: selectedPlayers,
 			})
 		},
 		setVoteResult: (v) => {
@@ -63,37 +68,41 @@ const usePlayerStore = create((set, get) => (
 			activityId,
 			captchaId,
 			code,
-			isSingleVote = true
+			isSingleVote = true,
+			dots,
 		}) => {
 			const state = get()
 			const wechatUser = utils.getObCache("wechatUser")
 			const { headimgurl, nickname, openid } = wechatUser
 			const playerIds = state.selectedPlayers.map(item => item.id)
+			console.log('captchaId', captchaId)
 			doVote({
+				token: captchaId || window.captchaToken,
 				activityId,
 				playerIds,
 				avatar: headimgurl,
 				openid: openid,
 				nickname: nickname,
 				code,
-				captchaId
+				captchaId,
+				dots,
+				captcha_key: captchaId,
 			}).then(res => {
 				const state = get()
-				if (code == 0) {
+				if (res.code == 0) {
 					state.setVoteResult({
 						status: "success",
 						text: res.msg
 					})
 					state.setShowVoteResult(true)
+					state.setSelectedPlayers([])
 				} else {
 					Toast.show({
-						duration: 5000,
+						duration: 2000,
 						icon: 'fail',
 						content: res.msg,
 					})
-
 				}
-
 				if (isSingleVote) {
 					set({
 						selectedPlayers: [],
@@ -104,26 +113,33 @@ const usePlayerStore = create((set, get) => (
 		doVoteCancel: ({
 			isSingleVote = true
 		}) => {
-			console.log('doVoteCancel')
+
 			if (isSingleVote) {
 				set({
 					selectedPlayers: [],
-					showAuthCodeModal: false
+					showAuthCodeModal: false,
+					showVoteResult: false,
 				})
 			} else {
 				set({
-					showAuthCodeModal: false
+					showAuthCodeModal: false,
+					showVoteResult: false,
 				})
 			}
 		},
+		
 		doVoteHandle: async ({
 			player,
 			isSingleVote = true,
 			isMultiVoteFloatPanelClick = false
 		}) => {
-			console.log('doVoteHandle', isSingleVote, isMultiVoteFloatPanelClick)
+			const state = get()
+			if(state.selectedPlayers.length == 0) {
+				// return
+			}
+
 			if(!isMultiVoteFloatPanelClick) {
-				const state = get()
+				
 				const wechatUser = utils.getObCache("wechatUser")
 				if (!wechatUser) {
 					// todo 
@@ -141,10 +157,10 @@ const usePlayerStore = create((set, get) => (
 					const index = state.selectedPlayers.findIndex(item => item.id === player.id);
 					if (index === -1) {
 						// 
-						console.log('如果对象不存在，添加到数组', state.selectedPlayers)
+
 						state.selectedPlayers.push(player);
 					} else {
-						console.log('如果对象已存在，从数组中删除', state.selectedPlayers)
+
 						state.selectedPlayers.splice(index, 1);
 					}
 				}
@@ -191,7 +207,7 @@ const usePlayerStore = create((set, get) => (
 					item.number = item.short_name
 				}
 			})
-			// console.log('获取选手成功：', response.data)
+
 			set({
 				page: page,
 				total: response.data.count,

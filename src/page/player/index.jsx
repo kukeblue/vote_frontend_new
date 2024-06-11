@@ -48,25 +48,56 @@ export default () => {
   const vote_item_pic_array_type = useSettingStore((state) => state.activitySetting.vote_item_pic_array_type.values)
   const vote_type = useSettingStore((state) => state.activitySetting.vote_type.values)
 
-  // console.log('选手图片排列放手', vote_item_pic_array_type)
+  const shareActivityTitle = useSettingStore((state) => state.activitySetting.share_activity_title.values)
+  const shareContents = useSettingStore((state) => state.activitySetting.share_contents.values)
+  const shareImage = useSettingStore((state) => state.activitySetting.share_image.values)
+  const shareItemTitle = useSettingStore((state) => state.activitySetting.share_item_title.values)
+
 
   const columns = vote_item_pic_array_type == 2 ? 2 : 1
 
-  // console.log('detail组件参数：', params.get("id"))
-  // console.log('选手图片', playerInfo.thrumbs)
+  useEffect(() => {
+    let shareTitle = shareItemTitle.replace('{number}', playerInfo.number)
+    shareTitle = shareTitle.replace('{name}', playerInfo.name)
+    console.log(shareTitle)
+    setShareConfig(shareTitle, getImageByCode(playerInfo.cover))
+  }, [playerInfo, shareItemTitle]);
+
+  useEffect(() => {
+    return () => {
+      setShareConfig(shareActivityTitle, shareImage)
+      console.log('Timer cleared');
+    };
+  }, [])
+
+  const setShareConfig = (shareTitle, shareImage) => {
+    setTimeout(() => {
+      if (utils.hasRegister) {
+        utils.register(window.wx, null, {
+          title: shareTitle,
+          desc: shareContents || "",
+          link: window.location.href,
+          imgUrl: shareImage || ""
+        })
+      } else {
+        setShareConfig(shareTitle, shareImage)
+      }
+    }, 3000)
+  }
+
 
   useEffect(() => {
     if (activityId) {
-        addActivityPlayerVisits(activityId, params.get("id"))
-        getActivityPlayerInfo(activityId, params.get("id")).then(res => {
-        // console.log(res.data.info)
+      addActivityPlayerVisits(activityId, params.get("id"))
+      getActivityPlayerInfo(activityId, params.get("id")).then(res => {
+
         setPlayerInfo(res.data.info)
       })
     }
   }, [activityId])
 
   const handlePreviewImage = (i, images) => {
-    // console.log('debug 点击预览图片', i, images)
+
     const res = images.map(code => {
       return getImageByCode(code)
     })
@@ -119,13 +150,13 @@ export default () => {
       {show_number_in_detail && <div className='text-center'>{playerInfo.number}号</div>}
       {show_vote_item_name_in_detail && <div className='text-common text-center mt-0.01rem'>{playerInfo.name}</div>}
 
-      {show_vote_item_cover_in_detail && (!playerInfo.thrumbs || playerInfo.thrumbs.length == 0) && <Image src={playerInfo.cover && getImageByCode(playerInfo.cover)} className='player-pic h-auto bg-gray-200 rounded-10px mt-20px ml-5px mr-5px'></Image>}
+      {show_vote_item_cover_in_detail && (!playerInfo.thrumbs || playerInfo.thrumbs.length == 0) && playerInfo.cover && <Image src={playerInfo.cover && getImageByCode(playerInfo.cover)} className='player-pic h-auto bg-gray-200 rounded-10px mt-20px ml-5px mr-5px'></Image>}
       <div>
         {/* 选手照片 */}
         {show_vote_item_cover_in_detail && vote_item_pic_array_type == 1 && <Swiper
           loop
           onIndexChange={i => {
-            // // console.log(i, 'onIndexChange1')
+
           }}
         >   {playerInfo.thrumbs && playerInfo.thrumbs.map(code => {
           return <Swiper.Item key={code}>
@@ -134,7 +165,7 @@ export default () => {
         })}
         </Swiper>}
       </div>
-      {show_vote_item_cover_in_detail && vote_item_pic_array_type != 1 && <Grid columns={columns} gap={0}>
+      {show_vote_item_cover_in_detail && vote_item_pic_array_type != 1 && <Grid columns={columns} gap={5}>
         {playerInfo.thrumbs && playerInfo.thrumbs.map((code, i) =>
           <Grid.Item key={code}>
             <Image onClick={() => handlePreviewImage(i, playerInfo.thrumbs)} src={getImageByCode(code)} width={"100%"} height="auto"></Image>

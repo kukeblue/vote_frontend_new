@@ -25,7 +25,7 @@ export default function VoteIntroInfoCard({
         const interval = setInterval(() => {
             const ret = countTime()
             if(JSON.stringify(ret) != JSON.stringify(timeData)) {
-                // // console.log(ret)
+
                 setTimeData(ret)
             }
           }, 1000);

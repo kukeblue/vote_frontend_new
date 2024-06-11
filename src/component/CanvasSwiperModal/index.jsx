@@ -59,7 +59,7 @@ export default function CanvasSwiperModal({
                     autoplay
                     autoplayInterval={10000}
                     onIndexChange={i => {
-                        // // console.log(i, 'onIndexChange1')
+
                     }}
                 >       {dataUrl.map((url, i)=><Swiper.Item key={i} className='w-full flex justify-center items-center'>
                             <div className='w-3/5'>
@@ -92,7 +92,7 @@ export default function CanvasSwiperModal({
                         <div
                             v-if="
                                 playInfo.player_info &&
-                                playInfo.player_info != ''
+                                playInfo.player_info != 
                             "
                             className="player-info"
                         >

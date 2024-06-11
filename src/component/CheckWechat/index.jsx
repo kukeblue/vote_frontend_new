@@ -8,7 +8,7 @@ export default function CheckWechat(props) {
 
     const handleClick = async () => {
         if(isWeChatClient()) {
-            // console.log('dddd')
+
             props.onClick(...props.parameters)
         }else{
             const url = await QRCode.toDataURL(location.href);

@@ -42,7 +42,7 @@ export default function HomeButton() {
 
     
 
-    console.log('showThemeQuick', showThemeQuick, theme_history_url)
+
 
     return showBackHome && isExpand && <div className={`home-button flex items-center justify-center ${isExpand}`}>
         <div onClick={handleClickJumpTheme} className='home-button-text'>返回专题</div>

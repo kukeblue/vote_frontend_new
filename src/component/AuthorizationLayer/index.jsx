@@ -9,9 +9,9 @@ function AuthorizationLayer(props) {
     const activityId = useSettingStore((state) => state.activityId)
     
     const handleClickAuth = async () => {
-        // console.log('点击授权')
+
         const res = await fetchAuthUrl(activityId)
-        console.log(res.data)
+
         if (import.meta.env.MODE === 'development') {
             res.data = res.data.replace('middle', 'middle2')
         }

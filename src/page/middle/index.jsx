@@ -20,9 +20,9 @@ export default ()=>{
   let code = searchParams.get('code')
 
   useEffect(()=>{
-    // console.log('useEffect', code, activityId)
+
     if(code && activityId) {
-      // console.log('获取微信用户信息')
+
       fetchWechatUser(code, activityId).then(res=>{
         if(res.code == 0) {
           setObCache('wechatUser', res.data)
@@ -30,7 +30,7 @@ export default ()=>{
           setOpenid(res.data.openid)
           navigate("/vote", {replace: true})
         }
-        // console.log(res)
+
       })
     }
   }, [code, activityId])

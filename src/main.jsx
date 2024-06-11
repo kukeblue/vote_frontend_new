@@ -11,50 +11,66 @@ import Intro from './page/intro';
 import Rank from './page/rank';
 import Player from './page/player';
 import Apply from './page/apply';
+import Voting from './page/voting';
+
 import ActivityList from './page/activityList';
 
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { AliveScope, KeepAlive } from 'react-activation';
-
 import MiddlePage from './page/middle';
-
-
 import './assets/less/index.less'
 import 'virtual:windi.css'
 
-// const router = createBrowserRouter([
-//     {
-//         element: <DefaultLayout />,
-//         children: [
-//             { path: "/vote", element: (<Vote/>)},
-//             { path: "/intro", element: (<Intro/>)},
-//             { path: "/rank", element: (<Rank/>)},
-//             { path: "/player", element: (<Player/>)},
-//             { path: "/middle", element: (<MiddlePage/>)},
-//         ],
-//     },
-//     // {
-//     //     element: <AdminLayout />,
-//     //     path: "/admin/:path?/:path?",
-//     //     children: [
-//     //         { path: "", element: (<Index/>) },
-//     //         { path: "setting", element: (<Index/>) },
-//     //         { path: "management", element: (<Management/>)},
-//     //         { path: "voteManage/result", element: (<VoteResult/>)},
-//     //         { path: "voteManage/edit", element: (<VoteManageEdit/>)},
-//     //         { path: "voteManage/statistics", element: (<VoteStatistics/>)},
-//     //         { path: "voteManage", element: (<VoteManageList/>)},
-//     //         { path: "series/seriesList", element: (<SeriesList/>)},
-//     //         { path: "series/seriesEdit", element: (<SeriesEdit/>)},
-//     //         { path: "accountUpgrade", element: (<AccountUpgrade/>)},
-//     //     ],
-//     // },
-//     {
-//         path: "/",
-//         element: <Navigate to="/vote"/>,
-//     },
-// ]);
+// 保存原生的 XMLHttpRequest 对象
+const originalXHR = window.XMLHttpRequest;
+
+// 重写 XMLHttpRequest 构造函数
+window.XMLHttpRequest = function () {
+  const xhr = new originalXHR();
+
+  // 拦截 open 方法
+  const originalOpen = xhr.open;
+  xhr.open = function (method, url, async, user, password) {
+    // 检查 URL 是否匹配
+    if (url === '/api/captcha/get_block_puzzle_captcha/captcha/get') {
+      // 修改 URL
+      url = '/api/captcha/get_block_puzzle_captcha';
+      console.log('????', async, user, password)
+
+    }
+    if (url === '/api/captcha/get_block_puzzle_captcha/captcha/check') {
+      // 修改 URL
+      url = '/api/captcha/check_block_puzzle_captcha';
+
+    }
+
+
+    // 调用原生的 open 方法
+    originalOpen.call(this, method, url, async, user, password);
+  };
+
+  // 拦截 send 方法
+  const originalSend = xhr.send;
+  xhr.send = function (data) {
+    // 在这里对请求进行修改
+    try {
+      const d = JSON.parse(data)
+      if(d && d.clientUid && d.token) {
+        console.log('captchaToken', d.token)
+        window.captchaToken = d.token
+      }
+    }
+    catch(e) {
+        console.error(e)
+    }
+
+    // 调用原生的 send 方法
+    originalSend.call(this, data);
+  };
+
+  return xhr;
+};
 
 const App = () => (
   <Router>
@@ -71,6 +87,8 @@ const App = () => (
           <Route path="rank" element={<Rank />} />
           <Route path="player" element={<Player />} />
           <Route path="apply" element={<Apply />} />
+          <Route path="voting" element={<Voting />} />
+
           <Route path="middle" element={<MiddlePage />} />
         </Route>
       </Routes>

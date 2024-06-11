@@ -25,7 +25,7 @@ export default () => {
   })
 
   useUnactivate(() => {
-    // console.log('TestFunction: willUnactivate')
+
   })
 
   const selectedGroup = usePlayerStore((state) => state.selectedGroup)
@@ -53,7 +53,7 @@ export default () => {
 
   const handleChangeGroup = (item) => {
     if (!item) return
-    // console.log(item)
+
     setSelectedGroup(item)
     if (item.id != 'all') {
       getPlayers(activityId, 1, item.id)

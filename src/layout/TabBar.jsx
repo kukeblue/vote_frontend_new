@@ -31,7 +31,7 @@ export default function TabBar() {
     const getPlayers = usePlayerStore((state) => state.getPlayers)
     const activityId = useSettingStore((state) => state.activityId)
     const topicMenu = useSettingStore((state) => state.activitySetting.topic_menu.values)
-    console.log('topicMenu', topicMenu)
+
     const tabs = topicMenu.filter(item => item.checked)
     const navigate = useNavigate();
     const href = location.href
@@ -53,10 +53,10 @@ export default function TabBar() {
             pageType = 'enroll'
         }
     })
-    console.log('pageType', pageType)
+
 
     const handleChangeTab = (v) => {
-        console.log('handleChangeTab', v)
+
         navigate("/" + v)
         // var divElement = document.getElementsByClassName("page")[0];
         // divElement.scrollTop = 0
@@ -90,7 +90,7 @@ export default function TabBar() {
                         <Input defaultValue={searchTxt} onChange={(v) => { handleChangeSearch(v) }} placeholder="请输入选手名称"></Input>
                         {/* {searchTxt && <CloseCircleOutlined
                             onClick={() => {
-                                setSearchTxt('')
+                                setSearchTxt()
                             }}
                             className="text-color_input_placeholder" />} */}
                     </div>
@@ -106,7 +106,7 @@ export default function TabBar() {
                 tabs.map(item => {
 
                     if (item.code == 'search') {
-                        return <Grid.Item className='flex flex-col items-center'>
+                        return <Grid.Item key={item.code} className='flex flex-col items-center'>
                             <div onClick={handleClickSearch} className='text-primary text-icon_tab leading-icon_tab iconfont iconsearch'></div>
                             <div onClick={handleClickSearch} className='text-base text-primary'>搜索</div>
                         </Grid.Item>

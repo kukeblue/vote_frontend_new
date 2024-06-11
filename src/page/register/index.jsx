@@ -148,9 +148,9 @@ function RegisterForm() {
         </Form.Item>
         <Button 
           onClick={()=>{
-            // console.log('点击注册')
+
             form.validateFields().then(values=>{
-              // console.log('注册提交表单:', values)
+
               doRegister(values)
             })
           }}
@@ -202,7 +202,7 @@ function useRegisterStore() {
   useEffect(()=>{
     if(verifyStrEmpty(location.search)) {
       const query = qs.parse(location.search.split('?')[1])
-      // console.log(query)
+
       if(query.type &&  query.type < 3) {
         setRegisterType(query.type)
       }

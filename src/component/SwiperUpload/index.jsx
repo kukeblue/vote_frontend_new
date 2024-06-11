@@ -10,10 +10,10 @@ function SwiperUpload() {
     return <div className='swiperUpload flex flex-wrap'>
          <div
             onDragStart={()=>{
-                // console.log('onDragstart');
+
             }}
             onDragEnd={()=>{
-                // console.log('onDragend');
+
             }}
             draggable className='mr-10px'>
             <div className='picture-upload-success flex-column-all-center'>
@@ -27,10 +27,10 @@ function SwiperUpload() {
         <div 
         onDragOver={(event)=>{event.preventDefault();}}
         onDrop={()=>{
-            // console.log('handle_drop-当元素在目的地放下时触发')
+
         }} id="target" className='mr-10px'>
             <div onDragStart={()=>{
-                // console.log('onDragStart')
+
             }} draggable className='picture-upload-success flex-column-all-center'>
                 <img alt="" className='picture-upload-image' src={banner2}/>
                 <div className='picture-upload-filter'>

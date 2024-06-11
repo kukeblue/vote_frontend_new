@@ -13,6 +13,15 @@ const useSettingStore = create((set) => (
     activityEndTime: '',
     activityTitle: '',
     activitySetting: {
+      share_activity_title: {values: ""},
+      share_contents: {values: ""},
+      share_image: {values: ""},
+      share_item_title: {values: "我是{number}号项目{name}，请帮我投一票"},
+      default_ani_image: {values: "12f5924b-7888-4bdc-aa4f-66c7013f5e7a1717907156402.jpg"},
+      default_btn_image: {values: "8df7ffc8-05a4-49f4-9bbf-5b116fe165f81717907882626.jpg"},
+      ad_type: {values: 1},
+      captcha_type: {values: 1},
+      every_time_vote: {values: 1},
       theme_history_url: {values: ""},
       show_theme_quick: {values: false},
       rule_text_plugin: {values: "活动说明"},
@@ -20,7 +29,7 @@ const useSettingStore = create((set) => (
       rule_text_plugin_size: {values: 1},
       rule_text_color: {values: "#000000"},
       rule_text_size: {values: 1},
-      rule_text: {values: ''},
+      rule_text: {values:''},
       display_rule_text: {values: true},
       bottom_text_color:{values: ""},
       bottom_text_url:{values: ""},
@@ -28,17 +37,17 @@ const useSettingStore = create((set) => (
       topic_menu: {values: []},
       open_text_notice: {values: false },
       show_ad: { values: false },
-      topic_bg_pic: { values: '' },
+      topic_bg_pic: { values:  ''},
       banners: { values: [] },
-      text_notice: { values: '' },
+      text_notice: { values:  ''},
       vote_type: { values: 1 },   // 单选 多选
       vote_times_limit_type: { values: 1 }, // 投票周期 1:固定次数  2:周期次数
       can_vote_same_item_num: { values: 1 }, // 周期内可以投几次
       min_choose_num: { values: 1 }, // 最少选择选手
       max_choose_num: { values: 1 }, // 最多选择选手
-      intro: { values: '' }, // 介绍文本
+      intro: { values:  ''}, // 介绍文本
       default_player_cover: { values: "2020101115550646836.jpg" },
-      page_float: { values: '' },
+      page_float: { values:  ''},
       music: { values: '' },
       vote_item_group_column: { values: 4 },
       vote_item_column_type: { values: 2 },
@@ -176,7 +185,7 @@ const useSettingStore = create((set) => (
     getActivitySetting: async (domain) => {
 
       const response = await fetchActivityBaseSettings(domain)
-      // console.log('获取活动配置成功：', response.data.id)
+
       // 动态设置主题色
       const primaryColor = response.data.parameters.color.values
       document.documentElement.style.setProperty('--primary-color', primaryColor);

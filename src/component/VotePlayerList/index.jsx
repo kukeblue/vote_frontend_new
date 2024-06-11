@@ -50,13 +50,13 @@ export default function VotePlayerList({
     }, [activityId])
 
     useEffect(() => {
-        console.log('【debug】build masonry', players.length)
+
         if (players.length == 0) return
     }, [players])
 
     const loadMore = async () => {
         if (!globalLoadding && (!loading || (total > players.length))) {
-            // // console.log('下拉刷新')
+
             globalLoadding = true
             await getPlayers(activityId, page + 1)
             globalLoadding = false
@@ -87,7 +87,7 @@ export default function VotePlayerList({
 
     const renderItem = (item) => {
         const isSelectedPlayer = checkIsSelectedPlayer(item.id)
-        item.video = item.video.replace(/(height=\d+\s+|width=\d+\s+)/g, '');
+        item.video = item.video.replace(/(height=\d+\s+|width=\d+\s+)/g, );
         return <div className={`${isleftRightStruct ? "flex" : ""} w-full h-full bg-white rounded-10px  relative`}>
             {showVoteItemNo && <div className=' text-white rounded-tl-8px rounded-br-8px bg-masking px-5px min-w-1rem text-center py-2px text-base absolute left-0 top-0'>{item.number}号</div>}
             {showVoteItemCover && style == 3 && item.video &&
@@ -118,7 +118,7 @@ export default function VotePlayerList({
         </div >
     }
 
-    // console.log('【VotePlayerList】', players)
+
     return <div className='w-full pl-10px pr-10px pt-12px'>
         <div className='w-full rounded-10px px-5px'>
             {voteItemArrayType == 1 ? <Grid columns={colCount} gap={8}>

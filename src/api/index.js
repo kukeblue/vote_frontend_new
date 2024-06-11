@@ -74,21 +74,26 @@ export function doApply(activity_id, data) {
 
 // 获取活动授权地址
 export function doVote({
+    token,
     activityId,
     playerIds,
     avatar,
     openid,
     nickname,
     code,
-    captchaId
+    captchaId,
+    dots,
+    captcha_key
 }) {
-    console.log('请求投票接口')
+
     let timestamp = new Date().getTime() + utils.getRandomNumber(6)
     const KEY = `MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCzz7EpgWspHMizcW2JReQ1lmKWKFH9/LjMkBPf1TTlNji+RzovBCEXhP+jSNy6JDMIZ8FSfaY7qBprEgGrGsTBXin5R54MrAU6Fq3Ul3M3DdZ0FPh28wkdShtf4mwGsb0HUICLGUKa3c4JYlNrziBkP5rtsSOws39j36FOLuIfQwIDAQAB`
     const encrypt = new JSEncrypt()
     encrypt.setPublicKey(KEY)
     const encryptData = encrypt.encrypt(openid)
+    console.log('token', token)
     let data = {
+        token,
         avatar,
         activity_id: activityId,
         player_ids: playerIds.toString(),
@@ -96,10 +101,13 @@ export function doVote({
         openid: encryptData,
         code,
         captchaId,
-        timestamp
+        timestamp,
+        captcha_key,
+        dots
+
     }
 
-    console.log('data', data)
+
 
     return post({
         url: '/api/pull/vote',
@@ -109,7 +117,35 @@ export function doVote({
 
 
 
-// 获取活动授权地址
+// 获取滑动证码
+export function fetchCnCaptcha() {
+    return post({
+        url: '/api/captcha/get_cn_captcha',
+        data: {
+        }
+    })
+}
+
+// 获取滑动证码
+export function fetchBlockPuzzleCaptcha() {
+    return post({
+        url: '/api/captcha/get_block_puzzle_captcha',
+        data: {
+        }
+    })
+}
+
+// 获取计算证码
+export function fetchCalculateCaptcha() {
+    return post({
+        url: '/api/captcha/get_calculate_captcha',
+        data: {
+        }
+    })
+}
+
+
+// 获取数字验证码
 export function fetchMatchCaptcha() {
     return post({
         url: '/api/captcha/get_match_captcha',

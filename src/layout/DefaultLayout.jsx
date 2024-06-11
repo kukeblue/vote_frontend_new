@@ -27,12 +27,8 @@ import HomeButton from '../component/Home';
 function UserLayout(props) {
   const getActivitySetting = useSettingStore((state) => state.getActivitySetting)
   const activitySetting = useSettingStore((state) => state.activitySetting)
-
   const showAuthCodeModal = usePlayerStore((state) => state.showAuthCodeModal)
-  const setAuthCodeModal = usePlayerStore((state) => state.setAuthCodeModal)
   const showMultiVoteFloatPanel = usePlayerStore((state) => state.showMultiVoteFloatPanel)
-
-
 
   const topicBgPic = activitySetting.topic_bg_pic.values
   const activityId = useSettingStore((state) => state.activityId)
@@ -43,6 +39,12 @@ function UserLayout(props) {
   const setOpenid = useSettingStore((state) => state.setOpenid)
   const location = useLocation();
 
+  const shareActivityTitle = useSettingStore((state) => state.activitySetting.share_activity_title.values)
+  const shareContents = useSettingStore((state) => state.activitySetting.share_contents.values)
+  const shareImage = useSettingStore((state) => state.activitySetting.share_image.values)
+  // const shareItemTitle = useSettingStore((state) => state.activitySetting.share_item_title.values)
+
+
   let { domain } = useParams();
   if (!domain) {
     const hostname = window.location.hostname;
@@ -50,11 +52,11 @@ function UserLayout(props) {
 
     if (parts.length >= 2) {
       const secondLevelDomain = parts[0];
-      console.log('获取最后两个部分作为二级域名', secondLevelDomain)
+
       domain = secondLevelDomain;
     } else {
-      domain = 'yymot'
-      // domain = 'o3nygq'
+      // domain = 'yymot'
+      domain = 'newnvp'
     }
   }
 
@@ -69,7 +71,7 @@ function UserLayout(props) {
 
 
   useEffect(() => {
-    if(activityId) {
+    if (activityId) {
       addActivityVisits(activityId)
     }
   }, [activityId])
@@ -87,27 +89,26 @@ function UserLayout(props) {
     if (!isMiddlePage && isWeChat && openid) {
       setTimeout(() => {
         fetchUserLogin(openid).then((res) => {
-          console.log('判断是否登录过期', res)
+
           if (res.code == -1 && res.msg == '未授权登陆') {
             setWechatUser(null)
-            setOpenid('')
+            setOpenid()
             utils.setObCache('wechatUser', {})
           }
           if (res.code == 0) {
             fetchWeChatSahreData().then(res => {
-              console.log('fetchWeChatSahreData', res)
               utils.register(window.wx, res.data, {
-                title: activityTitle,
-                desc: "xxx",
+                title: shareActivityTitle || activityTitle,
+                desc: shareContents || "",
                 link: window.location.href,
-                imgUrl: "https://upload.cyuandao.com/8d4ef64e-fad2-432d-a6bf-5d5f11d4259d1714441702229.jpg",
+                imgUrl: shareImage || "",
               })
             })
           }
         })
       }, 1000)
     }
-  }, [openid]);
+  }, [openid, activitySetting]);
 
   const showSkeletonPage = isWeChat ? (!openid || !activityId) : !activityId
   const showAuthorizationLayer = isWeChat && !isMiddlePage && !openid
@@ -117,16 +118,16 @@ function UserLayout(props) {
     <div style={{ backgroundImage: `url(${getImageByCode(topicBgPic)})` }} className='bg-size-[100%_100%] overflow-hidden bg-page defaultLayout w-full h-full relative'>
       {showAuthCodeModal && <AuthCodeModal></AuthCodeModal>}
       <VoteResultModal></VoteResultModal>
-      <HomeButton></HomeButton>
+      {location.pathname != '/voting' && <HomeButton></HomeButton>}
       <Notice></Notice>
       <Flotage></Flotage>
       <MusicPlayer></MusicPlayer>
       <Initad></Initad>
-      {showMultiVoteFloatPanel && <MultiVoteFloatPanel></MultiVoteFloatPanel>}
+      {location.pathname != '/voting' && showMultiVoteFloatPanel && <MultiVoteFloatPanel></MultiVoteFloatPanel>}
       <div id="page-main" className={`page w-full h-full flex flex-col ${showAuthorizationLayer ? 'overflow-hidden' : 'overflow-y-auto'} `}>
-        <SwiperImage></SwiperImage>
+        {location.pathname != '/voting' && <SwiperImage></SwiperImage>}
         <div className='page-main flex-1'>
-          <Outlet/>
+          <Outlet />
           {location.pathname != '/apply' && <TechnicalSupport />}
         </div>
       </div>
