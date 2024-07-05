@@ -20,6 +20,13 @@ export default function VoteIntroInfoCard({
     const timeData = useSettingStore((state) => state.timeData)
     const setTimeData = useSettingStore((state) => state.setTimeData)
     const activityTitle = useSettingStore((state) => state.activityTitle)
+    const voteItemShowName = useSettingStore((state) => state.activitySetting.vote_item_show_name.values)
+    const voteItemUnitName = useSettingStore((state) => state.activitySetting.vote_item_unit_name.values)
+    const voteNumUnitName = useSettingStore((state) => state.activitySetting.vote_num_unit_name.values)
+
+    // vote_item_unit_name: {values: "位"},
+    // vote_num_unit_name: {values: "票"},
+
     useEffect(() => {
         if(activityStartTime && activityEndTime) {
         const interval = setInterval(() => {
@@ -93,29 +100,29 @@ export default function VoteIntroInfoCard({
             return ret
         }
     }
-    return <div className='w-full pl-15px pr-15px pt-10px'>
-        <div className=' bg-white w-full rounded-10px p-10px'>
+    return <div className='w-full pl-15px pr-15px pt-10px '>
+        <div className=' bg-white w-full rounded-10px p-10px p-voteIntroInfoCard-block'>
             {showName && <div className='text-color_title text-center font-medium text-lg voteIntroInfoCard-title'>
                 {activityTitle}
             </div>}
-            {showStatistics && <div className='flex py-18px bg-primary rounded-10px mt-10px voteIntroInfoCard-summary-block w-full h-2.2rem'>
+            {showStatistics && <div  className='flex py-18px bg-primary rounded-10px mt-10px  w-full h-2.2rem p-voteIntroInfoCard-statistics-block'>
                 {showVoteNum && <div className='text-white flex-1 flex items-center flex-col border-r border-secondary border-dashed h-full'>
                     <div className='text-lg mt-5px'>{activityData.total_votes}</div>
-                    <div className='text-base'>总票数</div>
+                    <div className='text-base'>总{voteNumUnitName}数</div>
                 </div>}
                 <div className='text-white flex items-center flex-col border-r border-secondary border-dashed flex-1 h-full'>
                     <div className='text-lg mt-5px'>{activityData.total_players}</div>
-                    <div className='text-base'>选手数</div>
+                    <div className='text-base'>{voteItemShowName}数</div>
                 </div>
                 <div className='text-white flex items-center flex-col flex-1 h-full'>
                     <div className='text-lg mt-5px'>{activityData.total_visits}</div>
                     <div className='text-base'>访问量</div>
                 </div>
             </div>}
-            {showVoteTime && <div className='text-center mt-10px text-base text-color_time_count'>
-                <span className='iconfont icontime relative top-[0.02rem]'></span>
+            {showVoteTime && <div className='text-center mt-10px text-base text-color_time_count p-voteIntroInfoCard-timer-block'>
+                <span className='iconfont icontime relative top-[0.02rem] text-lg'></span>
                 &nbsp;
-                <span>投票 <span className='text-primary'>{timeData.status}</span> 倒计时
+                <span className='p-voteIntroInfoCard-timer-text'>投票 <span className='text-primary'>{timeData.status}</span> 倒计时
                     <span className='text-primary'>{timeData.day}</span>天
                     <span className='text-primary'>{timeData.hour}</span>时
                     <span className='text-primary'>{timeData.min}</span>分

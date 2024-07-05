@@ -1,4 +1,50 @@
-.logo {
-    width: 182px;
-    height: auto;
+.voteIntroPanel-header {
+    font-size: 0.4rem;
+    margin-bottom: 0.7rem;
+    min-height: 1rem;
+
+    .voteIntroPanel-header-item {
+        flex: 1;
+        text-align: center;
+        color: #ccc;
+    }
+
+    .left-line {
+        border-left: 1px solid #ccc;
+    }
+
+    .active {
+        color: var(--primary-color);
+    }
+}
+.intro-news {
+    .intro-news-item {
+        margin-bottom: 10px;
+        padding: 0px 15px;
+    }
+    .intro-news-item-pic {
+        object-fit:cover;
+        width: 100%;
+        height: 3.5rem;
+        border-radius: 5px;
+    }
+    .intro-news-item-title {
+        display: -webkit-box;             /* 必须结合 -webkit-box-orient 使用 */
+        -webkit-box-orient: vertical;     /* 设置盒子的排列方式为垂直排列 */
+        -webkit-line-clamp: 1;            /* 设置显示的行数 */
+        overflow: hidden;                 /* 隐藏溢出内容 */
+        text-overflow: ellipsis;          /* 使用省略号表示溢出部分 */
+        width: 100%;
+        padding: 5px;
+        font-size: 0.38rem;
+        color: #666;
+        padding-bottom: 7px;
+        border-bottom: 1px solid #eee;
+    }
+
+}
+
+.ant-empty-description {
+    color: #ccc !important;
+    font-size: 0.37rem !important;
 }

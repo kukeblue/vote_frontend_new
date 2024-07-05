@@ -11,12 +11,19 @@ export default function Initad() {
 
     const [itime, setITime] = useState(4)
     const musicCode = useSettingStore((state) => state.activitySetting.music.values)
+
     const adImage = useSettingStore((state) => state.activitySetting.ad_image.values)
+    const default_ad_image = useSettingStore((state) => state.activitySetting.default_ad_image.values)
+
+
     const isShowAd = useSettingStore((state) => state.activitySetting.show_ad.values)
     const adType = useSettingStore((state) => state.activitySetting.ad_type.values)
     const defaultAniImage = useSettingStore((state) => state.activitySetting.default_ani_image.values)
     const defaultBtnImage = useSettingStore((state) => state.activitySetting.default_btn_image.values)
     const activitySetting = useSettingStore((state) => state.activitySetting)
+    let aniImage = useSettingStore((state) => state.activitySetting.ani_image.values) || defaultAniImage
+    let btnImage = useSettingStore((state) => state.activitySetting.btn_image.values) || defaultBtnImage
+
 
 
 
@@ -61,12 +68,12 @@ export default function Initad() {
 
     return isShowAd && showAd && <div className="initad-page">
         {
-            adType == 1 ? <img src={adImage && getImageByCode(adImage)} className="p-initad-img" /> :
+            adType == 1 ? <img src={adImage && getImageByCode(adImage || default_ad_image)} className="p-initad-img" /> :
                 <div>
-                    <img src={defaultAniImage && getImageByCode(defaultAniImage)} className="p-initad-img" />
-                    { !isClickJump ? <img onClick={() => {
+                    <img src={aniImage && getImageByCode(aniImage)} className="p-initad-img" />
+                    { !isClickJump ? (btnImage && <img onClick={() => {
                         handleJumpPage()
-                    }} src={defaultBtnImage && getImageByCode(defaultBtnImage)} className='ani_button'></img> : <div onClick={() => {
+                    }} src={btnImage && getImageByCode(btnImage)} className='ani_button'></img>) : <div onClick={() => {
                         setShowAd(false)
                     }}
                     //  src={defaultBtnImage && getImageByCode(defaultBtnImage)}

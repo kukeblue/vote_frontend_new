@@ -4,6 +4,17 @@ import { JSEncrypt } from "js-encrypt"
 
 
 
+
+
+// 获取主题参数
+export function fetchTopicData(topicId) {
+    return post({
+        url: '/api/theme/topic/' + topicId,
+        data: {
+        }
+    })
+}
+
 // 添加活动访问数
 export function addActivityVisits(activity_id) {
     return post({

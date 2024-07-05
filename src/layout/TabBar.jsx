@@ -25,18 +25,29 @@ const tabIconNameMap = {
     enroll: "apply",
 }
 
+const tabIconImageMap = {
+    introduce: "activity",
+    poll: "vote",
+    rank: "ranking",
+    enroll: "apply",
+}
+
 export default function TabBar() {
     const searchTxt = usePlayerStore((state) => state.searchTxt)
     const setSearchTxt = usePlayerStore((state) => state.setSearchTxt)
     const getPlayers = usePlayerStore((state) => state.getPlayers)
     const activityId = useSettingStore((state) => state.activityId)
     const topicMenu = useSettingStore((state) => state.activitySetting.topic_menu.values)
-
+    const tempId = useSettingStore((state) => state.tempId)
     const tabs = topicMenu.filter(item => item.checked)
     const navigate = useNavigate();
     const href = location.href
     let pageType = ''
     let pathType = ''
+    // 
+    // let tempId = 'laodongmei'
+    console.log('tempId', tempId)
+    const showTabImage = (tempId == 'default')? false : true
 
     pageData.forEach(item => {
         const path = href.includes(item)
@@ -72,9 +83,9 @@ export default function TabBar() {
         Modal.clear()
 
     }
-    
+
     const handleClickCustom = (item) => {
-        if(item.link) {
+        if (item.link) {
             location.href = item.link
         }
     }
@@ -100,34 +111,38 @@ export default function TabBar() {
         })
     }
 
-    return <div className='pt-10px w-full h-1.8rem bg-white tab-bar absolute bottom-0 left-0 px-0.2rem'>
+    return <div className='pt-10px w-full h-1.8rem bg-white tab-bar absolute bottom-0 left-0 px-0.2rem p-tabBar'>
         <Grid columns={tabs.length} gap={8}>
             {
                 tabs.map(item => {
 
                     if (item.code == 'search') {
-                        return <Grid.Item key={item.code} className='flex flex-col items-center'>
-                            <div onClick={handleClickSearch} className='text-primary text-icon_tab leading-icon_tab iconfont iconsearch'></div>
+                        return <Grid.Item key={item.code} className='tab-item flex flex-col items-center'>
+                            {showTabImage &&<img className='w-0.7rem' src={`/images/tabIcon/${tempId}/search.png`}/>}
+                            {!showTabImage && <div onClick={handleClickSearch} className='text-primary text-icon_tab leading-icon_tab iconfont iconsearch'></div>}
+                            
                             <div onClick={handleClickSearch} className='text-base text-primary'>搜索</div>
                         </Grid.Item>
                     }
                     if (item.code == 'custom') {
                         return <Grid.Item className='flex flex-col items-center'>
-                            <div onClick={()=>handleClickCustom(item)} className='text-primary text-icon_tab leading-icon_tab iconfont iconweixin'></div>
-                            <div onClick={()=>handleClickCustom(item)} className='text-base text-primary'>{item.name}</div>
+                            <div onClick={() => handleClickCustom(item)} className='text-primary text-icon_tab leading-icon_tab iconfont iconweixin'></div>
+                            <div onClick={() => handleClickCustom(item)} className='text-base text-primary'>{item.name}</div>
                         </Grid.Item>
                     }
 
-                    return <Grid.Item key={item.code} className='flex flex-col items-center'>
-                        <div
+                    return <Grid.Item key={item.code} className={`tab-item${pageType == item.code ? '_fill' : ''} flex flex-col items-center`}>
+                        {showTabImage && <img 
+                        onClick={() => handleChangeTab(tabIconNameMap[item.code])}
+                        className='w-0.7rem' src={pageType == item.code ? `/images/tabIcon/${tempId}/${tabIconImageMap[item.code]}_fill.png`: `/images/tabIcon/${tempId}/${tabIconImageMap[item.code]}.png`}/>}
+                        {!showTabImage && <div
                             onClick={() => handleChangeTab(tabIconNameMap[item.code])}
-                            className={`text-primary text-icon_tab leading-icon_tab iconfont ${tabIconMap[item.code]}${pageType == item.code ? '_fill' : ''}`}></div>
-                        <div onClick={() => handleChangeTab(tabIconNameMap[item.code])} className='text-base text-primary'>{item.name}</div>
+                            className={`text-primary text-icon_tab leading-icon_tab iconfont ${tabIconMap[item.code]}${pageType == item.code ? '_fill' : ''}`}
+                        ></div>}
+                        <div onClick={() => handleChangeTab(tabIconNameMap[item.code])} className={`text-center text-base text-primary ${pageType == item.code ? 'tab-text_fill' : ''}`}>{item.name}</div>
                     </Grid.Item>
                 })
             }
-
-
         </Grid>
     </div>
 }

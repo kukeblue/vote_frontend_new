@@ -97,10 +97,10 @@ const usePlayerStore = create((set, get) => (
 					state.setShowVoteResult(true)
 					state.setSelectedPlayers([])
 				} else {
-					Toast.show({
-						duration: 2000,
-						icon: 'fail',
+					Dialog.alert({
+						title: '提示',
 						content: res.msg,
+						closeOnMaskClick: true,
 					})
 				}
 				if (isSingleVote) {

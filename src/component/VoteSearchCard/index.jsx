@@ -28,28 +28,28 @@ export default function VoteSearchCard({
         getPlayers(activityId, 1)
     }
 
-    return <div className='w-full pl-15px pr-15px pt-10px'>
+    return <div className='w-full pl-15px pr-15px pt-10px p-VoteSearchCard'>
         <div className=' bg-white w-full rounded-10px px-15px py-15px'>
-            <div className='flex'>
+            <div className='flex p-VoteSearchCard-search-block'>
                 <div className='px-15px py-20px rounded-10px w-6.2rem h-45px bg-input flex items-center'>
                    <span className='text-icon text-color_input_placeholder iconfont iconsearch relative text-xs'></span>&nbsp;
-                   <Input allowClear onChange={(v)=>{handleChangeSearch(v)}} value={searchTxt} placeholder="请输入选手名称"></Input>
+                   <Input clearable={true} onClear={()=>{handleChangeSearch('')}} onChange={(v)=>{handleChangeSearch(v)}}  placeholder="请输入选手名称"></Input>
                    
-                   {searchTxt && <CloseCircleOutlined 
+                   {/* {searchTxt && <CloseCircleOutlined 
                    onClick={()=>{
                      setSearchTxt()
                    }}
-                   className="text-color_input_placeholder"/>}
+                   className="text-color_input_placeholder"/>} */}
                 </div>
                 <div onClick={()=>{
                     handleDoSearch()
-                }} className='text-white flex items-center justify-center rounded-10px w-2rem h-45px bg-primary ml-0.3rem'>
+                }} className=' text-white flex items-center justify-center rounded-10px w-2rem h-45px bg-primary ml-0.3rem p-search-button'>
                     搜索
                 </div>
             </div>
             { showRankingButton && <div onClick={()=>{
                 navigate('/rank')
-            }} className=' text-white text-center mt-10px bg-primary py-10px px-15px rounded-10px'>查看排行榜</div> }
+            }} className='text-white text-center mt-10px bg-primary py-10px px-15px rounded-10px p-rank-button'>查看排行榜</div> }
         </div>
     </div>
 }

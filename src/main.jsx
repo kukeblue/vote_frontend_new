@@ -12,6 +12,9 @@ import Rank from './page/rank';
 import Player from './page/player';
 import Apply from './page/apply';
 import Voting from './page/voting';
+import Report from './page/report';
+import Article from './page/article'
+
 
 import ActivityList from './page/activityList';
 
@@ -24,11 +27,9 @@ import 'virtual:windi.css'
 
 // 保存原生的 XMLHttpRequest 对象
 const originalXHR = window.XMLHttpRequest;
-
 // 重写 XMLHttpRequest 构造函数
 window.XMLHttpRequest = function () {
   const xhr = new originalXHR();
-
   // 拦截 open 方法
   const originalOpen = xhr.open;
   xhr.open = function (method, url, async, user, password) {
@@ -36,16 +37,11 @@ window.XMLHttpRequest = function () {
     if (url === '/api/captcha/get_block_puzzle_captcha/captcha/get') {
       // 修改 URL
       url = '/api/captcha/get_block_puzzle_captcha';
-      console.log('????', async, user, password)
-
     }
     if (url === '/api/captcha/get_block_puzzle_captcha/captcha/check') {
       // 修改 URL
       url = '/api/captcha/check_block_puzzle_captcha';
-
     }
-
-
     // 调用原生的 open 方法
     originalOpen.call(this, method, url, async, user, password);
   };
@@ -83,11 +79,15 @@ const App = () => (
         <Route path="/" element={<DefaultLayout />}>
           <Route index element={<Navigate to="/vote" />} />
           <Route path="vote" element={<KeepAlive id="Vote"><Vote /></KeepAlive>} />
-          <Route path="intro" element={<Intro />} />
+          <Route path="intro" element={<KeepAlive id="Intro"><Intro /></KeepAlive>} />
           <Route path="rank" element={<Rank />} />
           <Route path="player" element={<Player />} />
           <Route path="apply" element={<Apply />} />
           <Route path="voting" element={<Voting />} />
+          <Route path="report" element={<Report />} />
+          <Route path="article" element={<Article />} />
+
+
 
           <Route path="middle" element={<MiddlePage />} />
         </Route>

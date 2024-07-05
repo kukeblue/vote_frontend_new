@@ -29,11 +29,13 @@ export default function VoteIntroRuleCard({
     const ruleTextPluginSize = useSettingStore((state) => state.activitySetting.rule_text_plugin_size.values)
     const ruleTextPlugin = useSettingStore((state) => state.activitySetting.rule_text_plugin.values)
     const ruleTextPluginColor = useSettingStore((state) => state.activitySetting.rule_text_plugin_color.values)
-
+    const voteItemUnitName = useSettingStore((state) => state.activitySetting.vote_item_unit_name.values)
+    const voteItemShowName = useSettingStore((state) => state.activitySetting.vote_item_show_name.values)
+    const voteNumUnitName = useSettingStore((state) => state.activitySetting.vote_num_unit_name.values)
     let ruleTextSizeName = generateFontSize(ruleTextSize)
     let ruleTextPluginSizeName = generateFontSize(ruleTextPluginSize)
 
-
+    const playerText = voteItemUnitName + voteItemShowName
 
 
     // 获取规则拼接
@@ -62,8 +64,8 @@ export default function VoteIntroRuleCard({
                 let minChooseNum = activitySetting.min_choose_num.values
                 let maxChooseNum = activitySetting.max_choose_num.values
 
-                let text1 = `最少选择${minChooseNum}位选手`
-                let text2 = `，最多选择${maxChooseNum}位选手`
+                let text1 = `最少选择${minChooseNum}${playerText}`
+                let text2 = `，最多选择${maxChooseNum}${playerText}`
                 setVoteRuleMatching(ruleText + text1 + text2)
             }
         }
@@ -71,13 +73,13 @@ export default function VoteIntroRuleCard({
     }, [activitySetting])
 
 
-    return showVoteRules && <div className='w-full pl-15px pr-15px pt-10px'>
-        <div className=' bg-white w-full rounded-10px p-10px'>
+    return showVoteRules && <div className='w-full pl-15px pr-15px pt-10px p-voteIntroRuleCard'>
+        <div className=' bg-white w-full rounded-10px p-10px p-voteIntroRuleCard-block'>
             <div className='text-primary text-center font-medium'>
                 活动规则
             </div>
             <div className='flex item-center justify-start pl-20px text-base mt-10px'>
-                <span className='text-primary iconfont icontime relative '></span>
+                <span className='text-primary iconfont icontime relative'></span>
                 &nbsp;
                 <div className='text-color_time_count text-base rule-label'>投票开始：</div>&nbsp;
                 <div className='text-color_time_count text-base'>{formatTime(new Date(activityStartTime * 1000))}</div>

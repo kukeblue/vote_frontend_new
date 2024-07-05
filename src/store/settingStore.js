@@ -8,17 +8,33 @@ let wechatUser = getObCache('wechatUser')
 
 const useSettingStore = create((set) => (
   {
+    tempId: '',
     activityId: '',
     activityStartTime: '',
     activityEndTime: '',
     activityTitle: '',
     activitySetting: {
+      button_name: {values: "点赞"},
+      vote_item_unit_name: {values: "点赞"},
+      vote_item_unit_name: {values: "位"},
+      vote_num_unit_name: {values: "票"},
+      vote_item_show_name: {values: "选手"},
+      vote_popup_image: {values: "2020082010520010820.jpg"},
+      default_ad_image: {values: ""},
+      vote_popup_image_url: {values: ""},
+      show_vote_popup_image: {values: true},
+      display_copyright: {values: true},
+      display_copyright_url: {values: ""},
+      bottom_text_size: {values: 1},
+      news:  {values: []},
       share_activity_title: {values: ""},
       share_contents: {values: ""},
       share_image: {values: ""},
       share_item_title: {values: "我是{number}号项目{name}，请帮我投一票"},
       default_ani_image: {values: "12f5924b-7888-4bdc-aa4f-66c7013f5e7a1717907156402.jpg"},
+      ani_image: {values: ""},
       default_btn_image: {values: "8df7ffc8-05a4-49f4-9bbf-5b116fe165f81717907882626.jpg"},
+      btn_image: {values: ""},
       ad_type: {values: 1},
       captcha_type: {values: 1},
       every_time_vote: {values: 1},
@@ -197,12 +213,16 @@ const useSettingStore = create((set) => (
       link.href = `/public/themes/${tempId}.css`;
       link.type = 'text/css';
       link.rel = 'stylesheet';
+      document.title = response.data.title;
+
+
       document.head.appendChild(link);
 
       // const authUrlRes = await fetchAuthUrl(response.data.id)
       playerStore.getState().getGroups(response.data.id)
 
       set({
+        tempId: tempId,
         activityId: response.data.id,
         activityTitle: response.data.title,
         activitySetting: response.data.parameters,

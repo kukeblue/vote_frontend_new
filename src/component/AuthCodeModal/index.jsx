@@ -50,6 +50,7 @@ export default function AuthCodeModal({
             });
             doVoteConfirm({ activityId, captchaId, code, isSingleVote, dots: dots.toString() })
         }
+        handleClose()
         // setShowVoteResult(true)
     }
     useEffect(() => {
@@ -98,7 +99,7 @@ export default function AuthCodeModal({
     const handleClose = () => doVoteCancel({ isSingleVote })
     return <div className='auth-code-modal'>
         <div className='cloud'></div>
-        {captchaType < 0 && <div className='authCodeModal-content-area'>
+        {captchaType < 3 && <div className='authCodeModal-content-area'>
 
 
             <div className="flex-cekiknter authCodeModal-title">验证码</div>

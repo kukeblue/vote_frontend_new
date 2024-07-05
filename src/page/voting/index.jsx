@@ -4,7 +4,7 @@ import { Button } from 'antd-mobile'
 import usePlayerStore from '../../store/playerStore'
 import useSettingStore from '../../store/settingStore'
 import { getImageByCode } from '../../utils/format'
-import { Toast, Stepper } from 'antd-mobile'
+import { Toast, Stepper, Dialog } from 'antd-mobile'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -18,24 +18,26 @@ export default function Voting() {
   const everyTimeVote = useSettingStore((state) => state.activitySetting.every_time_vote.values)
   const navigate = useNavigate();
 
-  
+
   let minChooseNum = activitySetting.min_choose_num.values
   let maxChooseNum = activitySetting.max_choose_num.values
 
   const handleClickVote = () => {
 
     if (selectedPlayers.length > maxChooseNum) {
-      Toast.show({
-        icon: 'fail',
+      Dialog.alert({
+        title: '提示',
         content: "最多选择" + maxChooseNum + "项",
+        closeOnMaskClick: true,
       })
       return
     }
 
     if (selectedPlayers.length < minChooseNum) {
-      Toast.show({
-        icon: 'fail',
+      Dialog.alert({
+        title: '提示',
         content: "最少选择" + minChooseNum + "项",
+        closeOnMaskClick: true,
       })
       return
     }
@@ -57,8 +59,8 @@ export default function Voting() {
     setSelectedPlayers(ret)
   }
 
-  if(selectedPlayers.length == 0) {
-    navigate('/vote', {replace: true})
+  if (selectedPlayers.length == 0) {
+    navigate('/vote', { replace: true })
   }
 
 
@@ -90,14 +92,14 @@ export default function Voting() {
             </div>
           </div>
           <div className='flex flex-col items-end'>
-           { everyTimeVote == 1 ? <span onClick={() => handleClikcRemove(item)} className=' iconfont iconclose p-voting-item-close'></span>
-            :<Stepper
-              min={1}
-              defaultValue={1}
-              onChange={value => {
+            {everyTimeVote == 1 ? <span onClick={() => handleClikcRemove(item)} className=' iconfont iconclose p-voting-item-close'></span>
+              : <Stepper
+                min={1}
+                defaultValue={1}
+                onChange={value => {
 
-              }}
-            />}
+                }}
+              />}
           </div>
         </div>)
       }

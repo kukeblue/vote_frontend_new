@@ -39,7 +39,7 @@ export default function VoteGroupCard({
 
 
 
-    return showGroup && <div className='w-full pl-15px pr-15px pt-10px'>
+    return showGroup && <div className='p-vote-group-card w-full pl-15px pr-15px pt-10px'>
         <div className=' bg-white w-full rounded-10px px-15px py-15px '>
             <Grid columns={voteItemGroupColumn} gap={8}>
             {

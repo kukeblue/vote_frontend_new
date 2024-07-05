@@ -1,5 +1,7 @@
 #!/bin/bash
 npm run build
+
+cp -r "public" "dist"
 # 服务器地址
 SERVER="120.79.168.48"
 # 服务器上的目标目录

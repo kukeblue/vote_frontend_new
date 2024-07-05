@@ -44,7 +44,7 @@ export default function HomeButton() {
 
 
 
-    return showBackHome && isExpand && <div className={`home-button flex items-center justify-center ${isExpand}`}>
+    return showThemeQuick && showBackHome && isExpand && <div className={`home-button flex items-center justify-center ${isExpand}`}>
         <div onClick={handleClickJumpTheme} className='home-button-text'>返回专题</div>
         <div onClick={handleClickExpand} className="home-button-jiantou">
             <span className={`iconfont ${(isExpand  == 'box-folder')?'iconjinru' : 'iconjinru-copy'}`}></span>

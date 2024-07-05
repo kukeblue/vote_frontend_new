@@ -41,6 +41,10 @@ export default function VotePlayerList({
     const defaultPlayerCover = useSettingStore((state) => state.activitySetting.default_player_cover.values)
     const colCount = useSettingStore((state) => state.activitySetting.vote_item_column_type.values)
     const voteItemArrayType = useSettingStore((state) => state.activitySetting.vote_item_array_type.values)
+    const voteNumUnitName = useSettingStore((state) => state.activitySetting.vote_num_unit_name.values)
+    const buttonName = useSettingStore((state) => state.activitySetting.button_name.values)
+
+    
     const [styleLoading, setStyleLoading] = useState(true)
 
     useEffect(() => {
@@ -88,8 +92,8 @@ export default function VotePlayerList({
     const renderItem = (item) => {
         const isSelectedPlayer = checkIsSelectedPlayer(item.id)
         item.video = item.video.replace(/(height=\d+\s+|width=\d+\s+)/g, );
-        return <div className={`${isleftRightStruct ? "flex" : ""} w-full h-full bg-white rounded-10px  relative`}>
-            {showVoteItemNo && <div className=' text-white rounded-tl-8px rounded-br-8px bg-masking px-5px min-w-1rem text-center py-2px text-base absolute left-0 top-0'>{item.number}号</div>}
+        return <div className={`${isleftRightStruct ? "flex" : ""} w-full h-full bg-white rounded-10px  relative p-votePlayerList-item-block`}>
+            {showVoteItemNo && <div className=' text-white rounded-tl-8px rounded-br-8px bg-masking px-5px min-w-1rem text-center py-2px text-base absolute left-0 top-0 p-number-block'>{item.number}号</div>}
             {showVoteItemCover && style == 3 && item.video &&
                 <div
                     style={{ height: `${(voteItemArrayType == 1) ? `${7 / colCount}rem` : "auto"}` }}
@@ -106,12 +110,12 @@ export default function VotePlayerList({
                     src={getImageByCode(item.cover || defaultPlayerCover)}>
                 </img>}
             <div className={`${isleftRightStruct ? 'w-1/2' : 'w-full'} mt-0.3rem pt-0.2rem pb-0.5rem flex flex-col items-center justify-center`}>
-                {showVoteNum && <div className='text-center'>{item.total_votes}&nbsp;票</div>}
-                {showVoteItemName && <div onClick={() => handleClickPlayer(item.id)} className='text-common mt-0.3rem text-center'>{item.name}</div>}
+                {showVoteNum && <div className='text-center p-votePlayerList-poll-block'>{item.total_votes}&nbsp;{voteNumUnitName}</div>}
+                {showVoteItemName && <div onClick={() => handleClickPlayer(item.id)} className='text-common mt-0.3rem text-center p-votePlayerList-name'>{item.name}</div>}
                 {showVoteItemIntro && <div onClick={() => handleClickPlayer(item.id)} className='text-color_dec text-base mt-0.2rem text-center'>{item.introduction}</div>}
-                {showVoteButton && <div className='mt-0.5rem flex justify-center w-full'>
-                    <div className={`${isSelectedPlayer ? 'bg-gray text-white' : 'text-white bg-primary'} rounded-5px  text-base  w-3/5 h-0.9rem flex items-center justify-center text-center`}>
-                        <CheckWechat onClick={handleClickVote} parameters={[item]}> {isSelectedPlayer ? '已选择' : '投票'} </CheckWechat>
+                {showVoteButton && <div className='mt-0.25rem flex justify-center w-full'>
+                    <div className={`${isSelectedPlayer ? 'bg-gray text-white' : 'text-white bg-primary'} rounded-5px  text-base  w-3/5 h-0.9rem flex items-center justify-center text-center p-votePlayerList-button`}>
+                        <CheckWechat onClick={handleClickVote} parameters={[item]}> {isSelectedPlayer ? '已选择' : buttonName} </CheckWechat>
                     </div>
                 </div>}
             </div>

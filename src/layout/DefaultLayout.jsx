@@ -23,6 +23,7 @@ import utils from '../utils/common';
 import { addActivityVisits, fetchUserLogin, fetchWeChatSahreData } from '../api';
 import MultiVoteFloatPanel from '../component/MultiVoteFloatPanel';
 import HomeButton from '../component/Home';
+import ScrollToTopButton from '../component/ScrollToTopButton';
 
 function UserLayout(props) {
   const getActivitySetting = useSettingStore((state) => state.getActivitySetting)
@@ -55,7 +56,8 @@ function UserLayout(props) {
 
       domain = secondLevelDomain;
     } else {
-      // domain = 'yymot'
+      // domain = 'brkexq'
+      // foaa1t.fvwboxx.cn
       domain = 'newnvp'
     }
   }
@@ -125,15 +127,19 @@ function UserLayout(props) {
       <Initad></Initad>
       {location.pathname != '/voting' && showMultiVoteFloatPanel && <MultiVoteFloatPanel></MultiVoteFloatPanel>}
       <div id="page-main" className={`page w-full h-full flex flex-col ${showAuthorizationLayer ? 'overflow-hidden' : 'overflow-y-auto'} `}>
-        {location.pathname != '/voting' && <SwiperImage></SwiperImage>}
+        {location.pathname != '/voting' && location.pathname != '/report' &&  location.pathname != '/article'
+        && <SwiperImage></SwiperImage>}
         <div className='page-main flex-1'>
           <Outlet />
+
           {location.pathname != '/apply' && <TechnicalSupport />}
         </div>
+        <ScrollToTopButton></ScrollToTopButton>
       </div>
       {showSkeletonPage && <SkeletonPage></SkeletonPage>}
       {showAuthorizationLayer && <AuthorizationLayer></AuthorizationLayer>}
       <TabBar></TabBar>
+
     </div>
   );
 }
