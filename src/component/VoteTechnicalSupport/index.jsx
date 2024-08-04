@@ -17,7 +17,7 @@ export default function TechnicalSupport() {
 
     let text_size = 'text-base'
     console.log('bottom_text_size', bottom_text_size)
-    switch(bottom_text_size){
+    switch (bottom_text_size) {
         case 1:
             text_size = 'text-base'
             break
@@ -36,13 +36,14 @@ export default function TechnicalSupport() {
     }
 
     return <div className='pt-1rem technical-support pb-4rem flex flex-col items-center'>
-        <div className={text_size}><span onClick={() => {
-            toLink()
-        }} className='text-primary' style={{ color: bottom_text_color }}>{bottom_text || '领航评选'}</span>提供技术支持</div>
-        {display_copyright && <div 
-        onClick={()=>{
-            if(display_copyright_url) location.href = display_copyright_url
-                
-        }} className='mt-20px p-10px bg-gray rounded-5px text-base text-white p-technical-support-button'>我也要创建活动</div>}
+        {/* {bottom_text && <div className={text_size}>
+            <span onClick={() => {toLink()}} className='text-primary' style={{ color: bottom_text_color }}>{bottom_text}</span>
+            提供技术支持</div>
+        } */}
+        {/* {display_copyright && <div onClick={() => 
+            {if (display_copyright_url) location.href = display_copyright_url }} 
+            className='mt-20px p-10px bg-gray rounded-5px text-base text-white p-technical-support-button'>
+                我也要创建活动
+            </div>} */}
     </div>
 }

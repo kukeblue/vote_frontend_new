@@ -32,8 +32,11 @@ export default () => {
   const activityId = useSettingStore((state) => state.activityId)
   const setSelectedGroup = usePlayerStore((state) => state.setSelectedGroup)
   const getPlayers = usePlayerStore((state) => state.getPlayers)
+  const voteItemSortType = useSettingStore((state) => state.activitySetting.vote_item_sort_type.values)
+
   const {
     show_all_group,
+    show_group_in_vote,
     show_enroll_button,
     show_name,
     show_ranking_button,
@@ -56,9 +59,9 @@ export default () => {
 
     setSelectedGroup(item)
     if (item.id != 'all') {
-      getPlayers(activityId, 1, item.id)
+      getPlayers(activityId, 1, item.id, voteItemSortType)
     } else {
-      getPlayers(activityId, 1)
+      getPlayers(activityId, 1, undefined, voteItemSortType)
     }
   }
 
@@ -83,6 +86,7 @@ export default () => {
   }, []);
 
   return <div className='overflow-hidden vote-page w-full'>
+    <div className='p-intro-wrap'>
     <VoteIntroInfoCard
       showVoteNum={true}
       showName={show_name}
@@ -90,12 +94,13 @@ export default () => {
       showVoteTime={show_timer} />
     <VoteIntroRuleCard
       showVoteRules={show_vote_rules} />
+    </div>
+    {show_search && <VoteSearchCard showRankingButton={show_ranking_button} />}
     <VoteGroupCard
-      showGroup={true}
+      showGroup={show_group_in_vote}
       showAll={show_all_group}
       selectedGroup={selectedGroup}
       onChangeGroup={handleChangeGroup} />
-    {show_search && <VoteSearchCard showRankingButton={show_ranking_button} />}
     <VotePlayerList
       showVoteButton={show_vote_button}
       showVoteItemName={show_vote_item_name}

@@ -6,7 +6,7 @@ import useSettingStore from '../../store/settingStore'
 import { useEffect } from 'react'
 import { getImageByCode } from '../../utils/format'
 import { useNavigate } from 'react-router'
-import { Grid, InfiniteScroll } from 'antd-mobile'
+import ScrollLoader from '../ScrollLoader'
 
 
 export default function VoteIntroPanel({
@@ -46,7 +46,7 @@ export default function VoteIntroPanel({
 
     const hasMore = ranks.length > viewRanks.length
 
-    const handleLoadMore = () => {
+    const  handleLoadMore = async () => {
         if (hasMore) (
             setPage(page + 1)
         )
@@ -57,10 +57,10 @@ export default function VoteIntroPanel({
     }
 
 
-    return <div className='w-full pl-15px pr-15px pt-10px'>
+    return <div className='w-full pl-15px pr-15px pt-10px p-rank-box'>
         <div className=' bg-white w-full rounded-10px py-0.5rem px-0.4rem p-voteIntroPanel-block'>
-            <div className='text-title text-primary text-center'>排行页面</div>
-            <div className='mt-1rem rank-list relative'>
+            <div className='text-title text-primary text-center'>排行榜</div>
+            <div className='mt-0.8rem rank-list relative'>
                 {viewRanks.map((item, index) => {
                     const player = item.player
                     return <div
@@ -72,21 +72,21 @@ export default function VoteIntroPanel({
                             </div>
                         </div>
                         {showPlayerCover &&
-                            <img src={getImageByCode(player.cover || defaultPlayerCover)} className=' object-cover object-center ml-0.5rem rounded-0.6rem w-1.2rem h-1.2rem bg-gray-300'></img>
+                            <img src={getImageByCode(player.cover || defaultPlayerCover, true)} className=' object-cover object-center ml-0.5rem rounded-0.6rem w-1.2rem h-1.2rem bg-gray-300'></img>
                         }
                         <div className='flex-1 h-1.2rem ml-0.3rem'>
-                            <div className='flex'>
+                            <div className='flex p-rank-name-wrap'>
                                 <div className='text-base text-color_dec p-rank-page-number'>{player.number}号</div>
-                                <div className='text-common ml-5px relative bottom-1px p-rank-page-name'>{player.name}</div>
+                                <div className='text-ellipsis-1 text-common ml-5px relative bottom-1px text-left p-rank-page-name'>{player.name}</div>
                             </div>
-                            {showPlayerDec && <div className='flex'>
-                                <div className='text-ellipsis-2 text-small text-color_dec'>{player.introduction}</div>
+                            {showPlayerDec && <div>
+                                <div style={{textAlign: 'left'}} className='text-ellipsis-1 text-small text-color_dec p-rank-player-intro'>{player.introduction}</div>
                             </div>}
                         </div>
                         <div className='text_color_type2 p-rank-page-poll'>{player.total_votes}{voteNumUnitName}</div>
                     </div>
                 })}
-                <InfiniteScroll loadMore={handleLoadMore} hasMore={hasMore} />
+                <ScrollLoader loadMore={handleLoadMore} hasMore={hasMore} />
                 {/* {hasMore && <div onClick={handleLoadMore} className='text-center w-full mt-1rem text-base '>加载更多</div> } */}
             </div>
         </div>

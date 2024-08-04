@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import './index.less'
-import {ImageViewer, Form, Input, ImageUploader, Picker, Button, TextArea, Toast, Dialog, Space, Image, Radio } from 'antd-mobile'
+import { ImageViewer, Form, Input, ImageUploader, Picker, Button, TextArea, Toast, Dialog, Space, Image, Radio } from 'antd-mobile'
 import usePlayerStore from '../../store/playerStore'
 import useSettingStore from '../../store/settingStore'
 import axios from 'axios';
 import { getImageByCode } from '../../utils/format'
 import { doApply, fetchApplyStatus } from '../../api'
 import CheckWechat from '../../component/CheckWechat'
+import { LinkOutline } from 'antd-mobile-icons'
 import {
 	UnorderedListOutline,
 	PayCircleOutline,
 	SetOutline,
 	DownOutline
 } from 'antd-mobile-icons'
-
+import { C_ApplyDownloadAttachment, C_ApplyInputPlaceholders } from './custom'
+import { RightOutline } from 'antd-mobile-icons'
 export default () => {
 	const [showGroupPicker, setShowGroupPicker] = useState(false)
 	const groups = usePlayerStore((state) => state.groups)
@@ -181,20 +183,43 @@ export default () => {
 			})
 		}
 	}, [activityId, openid])
-
-	const groupsPickerData = groups.filter(item => item.id != 'all').map(item => {
+	const groupsPickerData = groups.filter(item => item && item.id != 'all').map(item => {
 		return { label: item.name, value: item.id }
 	})
 
 	const beforeUpload = (file) => {
 		if (file.size > 1024 * 1024 * 5) {
-		  Toast.show('请选择小于 5M 的图片')
-		  return null
+			Toast.show('请选择小于 5M 的图片')
+			return null
 		}
 		return file
-	  }
-	
+	}
+	const isCustomBlock = (() => {
+		if(['669f064102199a22bf526f08'].includes(activityId)){
+			return true
+		}
+	})()
+	const renderCustomBlock = () => {
 
+		return <div className='h-7.5rem w-full px-20px flex items-start justify-center'>
+			<Button color="primary"
+				size='large'>
+				<div className='flex items-center'>
+					<span>企业报名入口</span><RightOutline fontSize={18} />
+				</div>
+			</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<Button color="primary"
+				size='large'>
+				<div className='flex items-center'>
+					<span>项目报名入口</span><RightOutline fontSize={18} />
+				</div>
+
+			</Button>
+		</div>
+	}
+
+
+	let replaceMap = C_ApplyInputPlaceholders(activityId)
 	return <div className='apply-page w-full'>
 		<div className='p-4 text-color_time_count'>
 			<div className='flex mb-3px'>
@@ -206,10 +231,28 @@ export default () => {
 				<div className='pl-10px text-common'>{enrollStartEnd}</div>
 			</div>
 		</div>
-		<div className='w-full px-20px'>
+		
+		{isCustomBlock ? renderCustomBlock() : <div className='w-full px-20px'>
 			<Form
 				form={form}
 				style={{ '--border-bottom': '0px' }}>
+				{C_ApplyDownloadAttachment(activityId) && <Form.Item  layout='horizontal' label='报名附件'>
+					<div className='flex items-center justify-between '>
+						<Input placeholder= ''/>
+						<Button
+						onClick={()=>{
+							location.href  = C_ApplyDownloadAttachment(activityId)
+						}}
+						color="primary"
+						size='small'
+						className='w-100px'
+						>
+							<span className='text-base'>下载</span>
+							<LinkOutline />
+						</Button>
+					</div>
+					<div className='mt-5px text-base text-left text-color_time_count'>附件说明：提交下面基本信息报名成功后，请下载附件填写详细信息后发送到邮箱xxxxxxxx</div>
+				</Form.Item>}
 				{applyResult && <Form.Item layout='horizontal' label='报名状态'>
 					<div className='flex items-center justify-between '>
 						<Input placeholder= ''/>
@@ -233,10 +276,10 @@ export default () => {
 								setShowGroupPicker(true)
 							}}
 						>
-							<Space>
+							
 								<DownOutline />
 								<span className='text-base'>选择</span>
-							</Space>
+							
 						</Button>
 					</div>: selectedGroup && selectedGroup.name}
 				</Form.Item>
@@ -247,7 +290,8 @@ export default () => {
 				</Form.Item>
 				{enrollInfoInput.attribute != 3 &&
 					<Form.Item layout='horizontal' rules={[{ required: enrollInfoInput.attribute == 2, message: enrollInfoInput.text + '不能为空' }]} label={enrollInfoInput.text} name={enrollInfoInput.name}>
-						{applyResult ? applyResult[enrollInfoInput.name] : <Input placeholder={'请输入' + enrollInfoInput.text} />}
+						{applyResult ? applyResult[enrollInfoInput.name] : 
+						<Input placeholder={replaceMap ? replaceMap('请输入' + enrollInfoInput.text): '请输入' + enrollInfoInput.text} />}
 					</Form.Item>
 				}
 				{enrollCustomInput.map((item, i) => {
@@ -389,7 +433,7 @@ export default () => {
 						<span className='text-common'>提交报名</span>
 					</Button></CheckWechat>
 			</div>}
-		</div>
+		</div>}
 	</div>
 }
 

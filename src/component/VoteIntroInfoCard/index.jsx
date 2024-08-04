@@ -122,11 +122,17 @@ export default function VoteIntroInfoCard({
             {showVoteTime && <div className='text-center mt-10px text-base text-color_time_count p-voteIntroInfoCard-timer-block'>
                 <span className='iconfont icontime relative top-[0.02rem] text-lg'></span>
                 &nbsp;
-                <span className='p-voteIntroInfoCard-timer-text'>投票 <span className='text-primary'>{timeData.status}</span> 倒计时
+                <div className='p-voteIntroInfoCard-timer-wrap'>
+                <span className='p-voteIntroInfoCard-timer-before'></span>
+                <span className='p-voteIntroInfoCard-timer-text'>
+                    投票 <span className='text-primary'>{timeData.status}</span> 倒计时
                     <span className='text-primary'>{timeData.day}</span>天
                     <span className='text-primary'>{timeData.hour}</span>时
                     <span className='text-primary'>{timeData.min}</span>分
-                    <span className='text-primary'>{timeData.second}</span>秒</span>
+                    <span className='text-primary'>{timeData.second}</span>秒
+                </span>
+                <span className='p-voteIntroInfoCard-timer-after'></span>
+                </div>
             </div>}
         </div>
     </div>

@@ -9,6 +9,7 @@ import useSettingStore from "../store/settingStore"
 import {
     CloseCircleOutlined,
 } from '@ant-design/icons';
+import { CustomTexts } from '../config/appConfig';
 const pageData = ["intro", "vote", "rank", "apply"]
 
 const tabIconMap = {
@@ -38,6 +39,8 @@ export default function TabBar() {
     const getPlayers = usePlayerStore((state) => state.getPlayers)
     const activityId = useSettingStore((state) => state.activityId)
     const topicMenu = useSettingStore((state) => state.activitySetting.topic_menu.values)
+    const voteItemSortType = useSettingStore((state) => state.activitySetting.vote_item_sort_type.values)
+    const voteItemShowName = useSettingStore((state) => state.activitySetting.vote_item_show_name.values)
     const tempId = useSettingStore((state) => state.tempId)
     const tabs = topicMenu.filter(item => item.checked)
     const navigate = useNavigate();
@@ -45,9 +48,10 @@ export default function TabBar() {
     let pageType = ''
     let pathType = ''
     // 
-    // let tempId = 'laodongmei'
+    // let tempId = 'chuangzihao'
     console.log('tempId', tempId)
     const showTabImage = (tempId == 'default')? false : true
+    const CustomTextMap= CustomTexts.VoteSearchCard[activityId] || CustomTexts.VoteSearchCard.default
 
     pageData.forEach(item => {
         const path = href.includes(item)
@@ -79,7 +83,7 @@ export default function TabBar() {
 
     const handleDoSearch = (v) => {
         navigate('/vote')
-        getPlayers(activityId, 1)
+        getPlayers(activityId, 1, undefined, voteItemSortType)
         Modal.clear()
 
     }
@@ -95,17 +99,17 @@ export default function TabBar() {
             closeOnMaskClick: true,
             content: (
                 <div className='flex flex-col items-center'>
-                    <div className='text-center text-title text-primary'>搜索</div>
+                    <div className='text-center text-title text-primary p-search-button_v1'>搜索</div>
                     <div className='mt-0.5rem px-15px  rounded-10px w-6.2rem h-48px bg-input flex items-center'>
                         <span className='text-icon text-color_input_placeholder iconfont iconsearch relative text-xs'></span>&nbsp;
-                        <Input defaultValue={searchTxt} onChange={(v) => { handleChangeSearch(v) }} placeholder="请输入选手名称"></Input>
+                        <Input defaultValue={searchTxt} onChange={(v) => { handleChangeSearch(v) }} placeholder={`请输入${voteItemShowName}名称或${CustomTextMap["编号"]}`}></Input>
                         {/* {searchTxt && <CloseCircleOutlined
                             onClick={() => {
                                 setSearchTxt()
                             }}
                             className="text-color_input_placeholder" />} */}
                     </div>
-                    <div onClick={() => handleDoSearch()} className='mt-0.7rem rounded-5px text-white text-base bg-primary w-3/5 h-0.9rem flex items-center justify-center text-center'>搜索</div>
+                    <div onClick={() => handleDoSearch()} className='mt-0.7rem rounded-5px text-white text-base bg-primary w-3/5 h-0.9rem flex items-center justify-center text-center p-search-modal-button'>搜索</div>
                 </div>
             ),
         })
@@ -117,11 +121,11 @@ export default function TabBar() {
                 tabs.map(item => {
 
                     if (item.code == 'search') {
-                        return <Grid.Item key={item.code} className='tab-item flex flex-col items-center'>
-                            {showTabImage &&<img className='w-0.7rem' src={`/images/tabIcon/${tempId}/search.png`}/>}
-                            {!showTabImage && <div onClick={handleClickSearch} className='text-primary text-icon_tab leading-icon_tab iconfont iconsearch'></div>}
+                        return <Grid.Item key={item.code} onClick={()=>handleClickSearch()} className='tab-item flex flex-col items-center'>
+                            {showTabImage &&<img  className='w-0.7rem' src={`/images/tabIcon/${tempId}/search.png`}/>}
+                            {!showTabImage && <div className='text-primary text-icon_tab leading-icon_tab iconfont iconsearch'></div>}
                             
-                            <div onClick={handleClickSearch} className='text-base text-primary'>搜索</div>
+                            <div className='text-base text-primary'>搜索</div>
                         </Grid.Item>
                     }
                     if (item.code == 'custom') {

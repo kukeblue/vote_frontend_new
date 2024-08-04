@@ -4,6 +4,7 @@ const ScrollToTopButton = () => {
   const [showButton, setShowButton] = useState(false);
 
   const styles = {
+    zIndex: 2,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

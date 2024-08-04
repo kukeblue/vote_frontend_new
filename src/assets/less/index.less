@@ -13,6 +13,18 @@ body {
   // overflow: hidden;
 }
 
+.adm-infinite-scroll span{
+  font-size: 0.37rem;
+}
+
+.p_default_disable{
+  display: none;
+}
+
+.apply-page  .adm-input-element {
+  font-size: 0.38rem !important;
+}
+
 #root {
   position: relative;
   width: 100%;
@@ -31,6 +43,9 @@ div {
 .adm-input-element::placeholder {
   font-size: 0.37rem !important;
 }
+
+
+
 
 
 .text-ellipsis {
@@ -72,6 +87,23 @@ div {
 }
 
 ::-webkit-scrollbar{display:none}
+
+
+.truncate-1-lines {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.truncate-2-lines {
+  height: 2rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  max-height: 3em; /* 2 * line-height (1.5em) */
+}
 
 @import './screen.less';
 @import './iconfont.less';

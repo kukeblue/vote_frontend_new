@@ -24,6 +24,7 @@ import { addActivityVisits, fetchUserLogin, fetchWeChatSahreData } from '../api'
 import MultiVoteFloatPanel from '../component/MultiVoteFloatPanel';
 import HomeButton from '../component/Home';
 import ScrollToTopButton from '../component/ScrollToTopButton';
+import { setObCache } from '../utils/cache';
 
 function UserLayout(props) {
   const getActivitySetting = useSettingStore((state) => state.getActivitySetting)
@@ -54,11 +55,12 @@ function UserLayout(props) {
     if (parts.length >= 2) {
       const secondLevelDomain = parts[0];
 
-      domain = secondLevelDomain;
+      domain = secondLevelDomain
     } else {
-      // domain = 'brkexq'
-      // foaa1t.fvwboxx.cn
-      domain = 'newnvp'
+      // domain = 'brkexq'https://newnvp.fvwboxx.cn/vote
+      // foaa1t.fvwboxx.cnhttps://.fvwboxx.cn/vote
+      //https://newnvp.fvwboxx.cn/vote
+      domain = 'bhlep4'
     }
   }
 
@@ -88,31 +90,30 @@ function UserLayout(props) {
 
   useEffect(() => {
     // 判断是否登录过期
-    if (!isMiddlePage && isWeChat && openid) {
-      setTimeout(() => {
+    if (!isMiddlePage && isWeChat && openid && shareActivityTitle) {
         fetchUserLogin(openid).then((res) => {
-
           if (res.code == -1 && res.msg == '未授权登陆') {
             setWechatUser(null)
             setOpenid()
-            utils.setObCache('wechatUser', {})
+            setObCache('wechatUser', {})
           }
           if (res.code == 0) {
-            fetchWeChatSahreData().then(res => {
-              utils.register(window.wx, res.data, {
-                title: shareActivityTitle || activityTitle,
-                desc: shareContents || "",
-                link: window.location.href,
-                imgUrl: shareImage || "",
+              fetchWeChatSahreData().then(res => {
+                const body = {
+                  title:shareActivityTitle || activityTitle,
+                  desc: shareContents || "",
+                  link: window.location.href,
+                  imgUrl: shareImage || "https://upload.cyuandao.com/2024070710214743703.png",
+                }
+                utils.register(window.wx, res.data, body)
               })
-            })
           }
         })
-      }, 1000)
     }
-  }, [openid, activitySetting]);
+  }, [openid, shareActivityTitle]);
 
-  const showSkeletonPage = isWeChat ? (!openid || !activityId) : !activityId
+
+  const showSkeletonPage =  !activityId
   const showAuthorizationLayer = isWeChat && !isMiddlePage && !openid
 
   return (
@@ -136,7 +137,7 @@ function UserLayout(props) {
         </div>
         <ScrollToTopButton></ScrollToTopButton>
       </div>
-      {showSkeletonPage && <SkeletonPage></SkeletonPage>}
+      <SkeletonPage visible={showSkeletonPage}></SkeletonPage>
       {showAuthorizationLayer && <AuthorizationLayer></AuthorizationLayer>}
       <TabBar></TabBar>
 

@@ -28,7 +28,7 @@ export default function ActivityList() {
             <img width="100%" height="100%" src={getImageByCode(attribute.background_image)}></img>
         </div>}
         {
-            activity.map(item => {
+            activity && activity.map(item => {
                 return attribute.show_activity_title == 2 ? <div
                     onClick={() => {
                         location.href = item.domain + '/vote'

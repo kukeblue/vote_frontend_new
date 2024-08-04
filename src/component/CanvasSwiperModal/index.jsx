@@ -53,7 +53,7 @@ export default function CanvasSwiperModal({
         {dataUrl &&  <div className='cloud'></div>}
         {/* <button onClick={captureScreenshot}>生成图片</button> */}
         <div style={{ zIndex: 1001 }} className="flex-col fixed flex justify-center items-center  mt-12">
-            <div style={{ width: "100vw" }}>
+            <div style={{ width: "100vw", maxWidth: '800px'}}>
                 {dataUrl && <Swiper
                     loop
                     autoplay
@@ -102,11 +102,11 @@ export default function CanvasSwiperModal({
                             <img
                                 className="banner"
                                 v-if="banners.length"
-                                src="https://upload.cyuandao.com/8362e45374baa9e8aeef36e6a77f02b2.jpg"
+                                src={playerImage}
                                 crossOrigin="anonymous"
                             />
                         </div>
-                        <div className="activity-name text-ellipsis-2">
+                        <div className="activity-name">
                             {title}
                         </div>
                     </div>
@@ -125,7 +125,7 @@ export default function CanvasSwiperModal({
             </div>
             <div  className="demo-item demo2">
                 <div className="header">
-                    <p className="activity-name text-ellipsis-2">
+                    <p className="activity-name">
                         {title}
                     </p>
                 </div>
@@ -160,7 +160,7 @@ export default function CanvasSwiperModal({
             </div>
             <div className="demo-item demo3">
                 <div className="canvas-content">
-                    <p className="activity-name text-ellipsis-2">
+                    <p className="activity-name">
                        {title}
                     </p>
                     <div className="img-container">
@@ -229,7 +229,7 @@ export default function CanvasSwiperModal({
                         />
                     </div>
                     <div className="act-box">
-                        <div className="activity-name text-ellipsis-2">
+                        <div className="activity-name">
                             {title}
                         </div>
                         <img
@@ -260,7 +260,7 @@ export default function CanvasSwiperModal({
                         src={getImageByCode(banners[0]['banner'])}
                         crossOrigin="anonymous"
                     />
-                    <p className="activity-name text-ellipsis-2">
+                    <p className="activity-name">
                         { title }
                     </p>
                     <div className="player-flex">
@@ -283,6 +283,7 @@ export default function CanvasSwiperModal({
                                 {playerName}
                             </div>
                             <div
+                                style={{position: 'relative', left: '-0.21rem'}}
                                 className="player-info"
                             >
                                 { playerDec }

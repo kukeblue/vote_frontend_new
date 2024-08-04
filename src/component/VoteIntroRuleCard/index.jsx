@@ -44,12 +44,12 @@ export default function VoteIntroRuleCard({
     useEffect(() => {
 
         if (activitySetting.vote_type.values != 0) {
-            let canVoteSameItemNum = activitySetting.can_vote_same_item_num.values
+            let per_wx_vote_num = activitySetting.per_wx_vote_num.values
             const voteType = activitySetting.vote_type.values
             if (voteType == 1) {
                 let unit = activitySetting.vote_type.values == 1 ? '票' : '次'
                 let cycle = activitySetting.vote_times_limit_type.values == 1 ? '整个活动期间' : '每天'
-                let ruleText = `每个微信号${cycle}可以投${canVoteSameItemNum}${unit}`
+                let ruleText = `每个微信号${cycle}可以投${per_wx_vote_num}${unit}`
 
                 setVoteRuleMatching(ruleText)
             } else {
@@ -78,39 +78,53 @@ export default function VoteIntroRuleCard({
             <div className='text-primary text-center font-medium'>
                 活动规则
             </div>
-            <div className='flex item-center justify-start pl-20px text-base mt-10px'>
-                <span className='text-primary iconfont icontime relative'></span>
-                &nbsp;
-                <div className='text-color_time_count text-base rule-label'>投票开始：</div>&nbsp;
-                <div className='text-color_time_count text-base'>{formatTime(new Date(activityStartTime * 1000))}</div>
-            </div>
-            <div className='flex item-center justify-start pl-20px text-base'>
-                <span className='text-primary iconfont icontime relative'></span>
-                &nbsp;
-                <div className='text-color_time_count text-base rule-label'>投票结束：</div>&nbsp;
-                <div className='text-color_time_count text-base'>{formatTime(new Date(activityEndTime * 1000))}</div>
-            </div>
-            <div className='flex item-center justify-start pl-20px text-base'>
-                <span className='text-primary iconfont icontishi relative'></span>
-                &nbsp;
-                <div className='text-color_time_count text-base rule-label'>投票规则：</div>&nbsp;
-                {!displayRuleText && <div className='text-color_time_count text-base '>{voteRuleMatching}</div>}
-                {displayRuleText &&
+            <div className='p-voteIntroRuleCard-block-text'>
+                
+                <div className='flex items-center justify-start pl-20px text-base mt-10px'>
+                    <span className='text-primary iconfont icontime relative'></span>
+                    &nbsp;
+                    <div className='text-color_time_count text-base rule-label'>投票开始：</div>&nbsp;
+                    <div className='text-color_time_count text-base'>{formatTime(new Date(activityStartTime * 1000))}</div>
+                </div>
+                <div className='flex item-center justify-start pl-20px text-base'>
+                    <span className='text-primary iconfont icontime relative'></span>
+                    &nbsp;
+                    <div className='text-color_time_count text-base rule-label'>投票结束：</div>&nbsp;
+                    <div className='text-color_time_count text-base'>{formatTime(new Date(activityEndTime * 1000))}</div>
+                </div>
+                <div className='flex item-center justify-start pl-20px text-base'>
+                    <span className='text-primary iconfont icontishi relative'></span>
+                    &nbsp;
+                    <div className='text-color_time_count text-base rule-label'>投票规则：</div>&nbsp;
+                    {!displayRuleText && <div className='text-color_time_count text-base '>{voteRuleMatching}</div>}
+                    {displayRuleText &&
+                        <div style={{
+                            whiteSpace: 'pre-line'
+                        }} className={`text-color_time_count text-base`}>
+                            {ruleText}
+                        </div>}
+                </div>
+                {ruleTextPlugin && <div className='flex item-center justify-start pl-20px text-base'>
+                    <span className='text-primary iconfont icontishi relative'></span>
+                    &nbsp;
+                    <div className='text-color_time_count text-base rule-label'>活动说明：</div>&nbsp;
                     <div style={{
-                        color: ruleTextColor
-                    }} className={`text-color_time_count ${ruleTextSizeName}`}>
-                        {ruleText}{ruleTextSize}
-                    </div>}
+                        whiteSpace: 'pre-line',
+                        color: ruleTextPluginColor
+                    }}
+                        className={`text-color_time_count ${ruleTextPluginSizeName}`}>{ruleTextPlugin}</div>
+                </div>}
+                <div style={{'display': 'none'}} className='c-customize-time'>
+                    <div className='c-customize-time_item'>
+                        <div>{formatTime(new Date(activityStartTime * 1000))}</div>
+                        <div className='c-customize-time_label'>活动开始</div>
+                    </div>
+                    <div className='c-customize-time_item'>
+                        <div>{formatTime(new Date(activityEndTime * 1000))}</div>
+                        <div className='c-customize-time_label'>活动结束</div>
+                    </div>
+                </div>
             </div>
-            {ruleTextPlugin && <div className='flex item-center justify-start pl-20px text-base'>
-                <span className='text-primary iconfont icontishi relative'></span>
-                &nbsp;
-                <div className='text-color_time_count text-base rule-label'>活动说明：</div>&nbsp;
-                <div style={{
-                    color: ruleTextPluginColor
-                }}
-                className={`text-color_time_count ${ruleTextPluginSizeName}`}>{ruleTextPlugin}</div>
-            </div>}
         </div>
     </div>
 }

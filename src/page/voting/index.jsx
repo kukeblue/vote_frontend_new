@@ -104,7 +104,7 @@ export default function Voting() {
         </div>)
       }
     </div>
-    <div className='flex justify-center mt-1rem p-1rem'>
+    <div className='flex justify-center mt-0.1rem p-1rem'>
       <Button onClick={() => { handleClickVote() }} block color='primary'>投票</Button>
     </div>
   </div>

@@ -1,0 +1,4 @@
+.apply-page .adm-form .adm-list-item:nth-child(4) input::placeholder {
+    content: '' !important; 
+
+}

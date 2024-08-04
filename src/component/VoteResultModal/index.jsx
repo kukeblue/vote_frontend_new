@@ -40,7 +40,7 @@ export default function VoteResultModal({
                     if(votePopupImageUrl) {
                         location.href = votePopupImageUrl
                     }
-                }} className="w-full h-auto min-h-12" src={getImageByCode(votePopupImage || 'https://upload.cyuandao.com/2020082010520010820.jpg')}></img> : <img className="w-full h-auto min-h-12" src="https://upload.cyuandao.com/2020082010520010820.jpg"></img>
+                }} className="w-full h-auto min-h-12" src={getImageByCode(votePopupImage || '2020082010520010820.jpg')}></img> : <img className="w-full h-auto min-h-12" src="https://upload.cyuandao.com/2020082010520010820.jpg"></img>
                 } </div>
             <div onClick={() => {
                 doVoteCancel({ isSingleVote })

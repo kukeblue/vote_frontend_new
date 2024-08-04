@@ -17,6 +17,8 @@ export default function VoteGroupCard({
 
     const activityId = useSettingStore((state) => state.activityId)
     const voteItemGroupColumn = useSettingStore((state) => state.activitySetting.vote_item_group_column.values)
+    const voteItemSortType = useSettingStore((state) => state.activitySetting.vote_item_sort_type.values)
+
 
     const setSelectedGroup = usePlayerStore((state) => state.setSelectedGroup)
     const getPlayers = usePlayerStore((state) => state.getPlayers)
@@ -25,23 +27,18 @@ export default function VoteGroupCard({
         if(!showAll && groups.length > 1) {
             handleChangeGroup(groups[1])
         } 
-    }, [showAll, groups ])
+    }, [showAll, groups])
 
     const handleChangeGroup = (item)=>{
-
-        onChangeGroup && onChangeGroup(item)
-
         setSelectedGroup(item)
-        if(item.id != 'all') {
-            getPlayers(activityId, 1, item.id)
-        }
+        onChangeGroup && onChangeGroup(item)
     }
 
 
 
     return showGroup && <div className='p-vote-group-card w-full pl-15px pr-15px pt-10px'>
         <div className=' bg-white w-full rounded-10px px-15px py-15px '>
-            <Grid columns={voteItemGroupColumn} gap={8}>
+            <Grid columns={voteItemGroupColumn} gap={4}>
             {
                 groups && groups.map(item=>{
                     if(!showAll && item.id == 'all') {
@@ -51,7 +48,7 @@ export default function VoteGroupCard({
                     <div key={item.id} 
                         className={`${selectedGroup && (item.id == selectedGroup.id) ? 'bg-primary text-white' : 'text-primary'}  
                         overflow-hidden whitespace-nowrap text-overflow-ellipsis 
-                        border border-primary mx-5px text-center text-base px-15px py-5px rounded-15px `}>
+                        border border-primary mx-5px text-center text-base px-15px py-5px rounded-15px group-item`}>
                         {
                         item.name
                     }</div></Grid.Item>

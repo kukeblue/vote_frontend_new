@@ -5,6 +5,15 @@ import { JSEncrypt } from "js-encrypt"
 
 
 
+// 获取选手排名
+export function fetchPlayerData(activity_id, player_id) {
+    return post({
+        url: `/api/activity/get_player_details/${activity_id}/${player_id}`,
+        data: {
+        }
+    })
+}
+
 
 // 获取主题参数
 export function fetchTopicData(topicId) {
@@ -41,7 +50,7 @@ export function fetchWeChatSahreData() {
     return post({
         url: '/api/wechat/share',
         data: {
-            url:  decodeURIComponent(location.href)
+            url: decodeURIComponent(location.href)
         }
     })
 }
@@ -171,7 +180,7 @@ export function fetchAuthUrl(activityId, state) {
         url: '/api/wechat/get_jump_url',
         data: {
             "activity_id": activityId,
-            state
+            "state": state
         }
     })
 }

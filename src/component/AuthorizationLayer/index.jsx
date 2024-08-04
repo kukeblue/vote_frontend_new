@@ -10,12 +10,12 @@ function AuthorizationLayer(props) {
     
     const handleClickAuth = async () => {
 
-        const res = await fetchAuthUrl(activityId)
+        const res = await fetchAuthUrl(activityId, encodeURIComponent(location.pathname + location.search))
 
         if (import.meta.env.MODE === 'development') {
             res.data = res.data.replace('middle', 'middle2')
         }
-        location.href = res.data
+        location.href = res.data 
         // https://m.kukechen.top/activity/middle?domain=O3NYGq&code=031UYZkl2R3O0c4t70ml2Ydvj71UYZkf&state=
     }
 

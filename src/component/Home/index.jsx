@@ -33,9 +33,8 @@ export default function HomeButton() {
         }
     }
     const handleClickJumpTheme = (e) => {
-
         if(theme_history_url) {
-            location.href = theme_history_url
+            window.location.href = theme_history_url
         }
         e.stopPropagation();
     }

@@ -1,0 +1,3 @@
+.p-vote-group-card .adm-grid-item:nth-child(1) {
+    --item-span: 2 !important;
+}

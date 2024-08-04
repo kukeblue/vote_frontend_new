@@ -3,7 +3,7 @@ npm run build
 
 cp -r "public" "dist"
 # 服务器地址
-SERVER="120.79.168.48"
+SERVER="120.79.133.28"
 # 服务器上的目标目录
 TARGET_DIR="/data/vote_frontend_new"
 # 本地 dist 目录的路径

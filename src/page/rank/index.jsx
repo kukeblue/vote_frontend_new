@@ -35,9 +35,12 @@ export default ()=>{
   }
 
   return <div className='overflow-hidden rank-page w-full'>
+    <div className='p-intro-wrap'>
     <VoteIntroInfoCard showName={show_name_in_rank} showStatistics={show_statistics_in_rank} showVoteNum={show_vote_num_in_rank}/>
     <VoteIntroRuleCard showVoteRules={show_vote_rules_in_rank}/>
-    <VoteGroupCard onChangeGroup={handleChangeGroup} selectedGroup={selectedGroupInRank} showGroup={show_group_in_rank} showAll={show_all_ranking}/>
+    </div>
+    <VoteGroupCard 
+    onChangeGroup={handleChangeGroup} selectedGroup={selectedGroupInRank} showGroup={show_group_in_rank} showAll={show_all_ranking}/>
     <VoteRankPanel showPlayerCover={show_vote_item_cover_in_rank} showPlayerDec={show_vote_item_intro_in_rank}/>
   </div>
 }

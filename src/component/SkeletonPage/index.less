@@ -1,10 +1,18 @@
 .skeleton-page {
     position: absolute;
-    // z-index: 9999;
+    z-index: 9999;
     width: 100%;
     height: 100%;
     background: #fff;
     top: 0;
+}
+.fade-out {
+    opacity: 1;
+    transition: opacity 0.2s ease-out;
+}
+
+.fade-hidden {
+    opacity: 0;
 }
 @keyframes opacity {
     0% {

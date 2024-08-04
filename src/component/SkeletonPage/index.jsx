@@ -1,9 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, Skeleton } from 'antd-mobile'
 import './index.less'
 
-export default function SkeletonPage({ children, show }) {
-    return <div className="skeleton-page bg-blue-700">
+export default function SkeletonPage({ visible }) {
+
+    useEffect(()=>{
+        const div = document.getElementById('skeleton-page');
+        // 等待过渡效果完成后设置 display: none
+        div.addEventListener('transitionend', function() {
+            div.style.display = 'none';
+        }, { once: true });
+    }, [])
+
+    useEffect(()=>{
+        const div = document.getElementById('skeleton-page');
+        if(!visible) {
+            setTimeout(()=>{
+                div.classList.add('fade-hidden');
+            }, 500)
+        }
+    }, [visible])
+
+    return <div id="skeleton-page" className={`skeleton-page fade-out`}>
         <Skeleton animated className='w-100% h-200px' />
         <div className='left-0 top-170px absolute flex justify-center w-full'>
             <div className="w-10px h-10px rounded-5px bg-white m-5px"></div>

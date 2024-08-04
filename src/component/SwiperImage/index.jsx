@@ -16,14 +16,14 @@ export default function SwiperImage() {
     const swiperConfig = {
         indicator: () => null
     }
-    
     const items = banners.map((item, index) => (
+      
         <Swiper.Item key={index}>
             <Image onClick={()=>{
-                if(item.url ) {
-                    location.href = item.url
+                if(item.href) {
+                    location.href = item.href
                 }
-            }} src={getImageByCode(item.banner)} width={"100%"} height={'5.6rem'} />
+            }} src={getImageByCode(item.banner)} width={"100%"}/>
         </Swiper.Item>
     ))
 
