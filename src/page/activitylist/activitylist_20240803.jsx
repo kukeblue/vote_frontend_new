@@ -32,6 +32,7 @@ export default function ActivityList_20240803() {
                 imgUrl: "https://upload.cyuandao.com/285cbf86-9c7c-4e7b-8b5f-deb94b9053bc1722589876535.jpg",
             }
             utils.register(window.wx, res.data, body)
+            document.title = "首届湾区世界美食高质量公评大会评选活动"
         })
     }, [])
 

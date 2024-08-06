@@ -80,7 +80,7 @@ export default function Voting() {
       {selectedPlayers.map(item =>
         <div key={item.id} className='p-voting-item'>
           <div className='flex justify-between'>
-            {item.cover && <img src={getImageByCode(item.cover)} className='p-voting-avatar'></img>}
+            {item.cover && <img src={getImageByCode(item.cover, true)} className='p-voting-avatar'></img>}
             <div>
               <div className='flex items-center'>
                 <div className='p-voting-item-order'>{item.number}</div>

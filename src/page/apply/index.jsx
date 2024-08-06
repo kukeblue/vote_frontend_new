@@ -202,16 +202,21 @@ export default () => {
 	const renderCustomBlock = () => {
 
 		return <div className='h-7.5rem w-full px-20px flex items-start justify-center'>
-			<Button color="primary"
+			<Button onClick={()=>{
+					location.href = "https://www.wjx.cn/vm/mTXxJ8o.aspx#"
+				}}  color="primary"
 				size='large'>
 				<div className='flex items-center'>
-					<span>企业报名入口</span><RightOutline fontSize={18} />
+					<span>科技企业报名</span><RightOutline fontSize={18} />
 				</div>
 			</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<Button color="primary"
+			 onClick={()=>{
+				location.href = "https://www.wjx.cn/vm/YDkkYco.aspx#"
+			}}
 				size='large'>
 				<div className='flex items-center'>
-					<span>项目报名入口</span><RightOutline fontSize={18} />
+					<span>应用项目报名</span><RightOutline fontSize={18} />
 				</div>
 
 			</Button>
