@@ -4,6 +4,7 @@ import useSettingStore from '../../store/settingStore'
 import { formatTime } from '../../utils/format'
 import { useEffect, useState } from 'react'
 import './index.less'
+import { CustomTexts } from '../../config/appConfig'
 
 const generateFontSize = (size) => {
     let sizeName = 'text-base'
@@ -18,7 +19,7 @@ const generateFontSize = (size) => {
 export default function VoteIntroRuleCard({
     showVoteRules = true
 }) {
-
+    const activityId = useSettingStore((state) => state.activityId)
     const activityStartTime = useSettingStore((state) => state.activityStartTime)
     const activityEndTime = useSettingStore((state) => state.activityEndTime)
     const activitySetting = useSettingStore((state) => state.activitySetting)
@@ -32,11 +33,13 @@ export default function VoteIntroRuleCard({
     const voteItemUnitName = useSettingStore((state) => state.activitySetting.vote_item_unit_name.values)
     const voteItemShowName = useSettingStore((state) => state.activitySetting.vote_item_show_name.values)
     const voteNumUnitName = useSettingStore((state) => state.activitySetting.vote_num_unit_name.values)
+    const CustomTextMap= CustomTexts.VoteIntroRuleCard[activityId] || CustomTexts.VoteIntroRuleCard.default
+	const buttonName = useSettingStore((state) => state.activitySetting.button_name.values)
     let ruleTextSizeName = generateFontSize(ruleTextSize)
     let ruleTextPluginSizeName = generateFontSize(ruleTextPluginSize)
 
     const playerText = voteItemUnitName + voteItemShowName
-
+    
 
     // 获取规则拼接
     const [voteRuleMatching, setVoteRuleMatching] = useState()
@@ -76,41 +79,42 @@ export default function VoteIntroRuleCard({
     return showVoteRules && <div className='w-full pl-15px pr-15px pt-10px p-voteIntroRuleCard'>
         <div className=' bg-white w-full rounded-10px p-10px p-voteIntroRuleCard-block'>
             <div className='text-primary text-center font-medium'>
-                活动规则
+                {CustomTextMap['活动规则']}
             </div>
             <div className='p-voteIntroRuleCard-block-text'>
                 
-                <div className='flex items-center justify-start pl-20px text-base mt-10px'>
-                    <span className='text-primary iconfont icontime relative'></span>
+                <div className='flex justify-start pl-20px text-base mt-10px'>
+                    <span style={{lineHeight: '0.5rem'}} className='text-primary iconfont icontime relative'></span>
                     &nbsp;
-                    <div className='text-color_time_count text-base rule-label'>投票开始：</div>&nbsp;
+                    <div className='text-color_time_count text-base rule-label'>{buttonName}开始：</div>&nbsp;
                     <div className='text-color_time_count text-base'>{formatTime(new Date(activityStartTime * 1000))}</div>
                 </div>
-                <div className='flex item-center justify-start pl-20px text-base'>
-                    <span className='text-primary iconfont icontime relative'></span>
+                <div className='flex  justify-start pl-20px text-base'>
+                    <span style={{lineHeight: '0.5rem'}} className='text-primary iconfont icontime relative'></span>
                     &nbsp;
-                    <div className='text-color_time_count text-base rule-label'>投票结束：</div>&nbsp;
+                    <div className='text-color_time_count text-base rule-label'>{buttonName}结束：</div>&nbsp;
                     <div className='text-color_time_count text-base'>{formatTime(new Date(activityEndTime * 1000))}</div>
                 </div>
-                <div className='flex item-center justify-start pl-20px text-base'>
-                    <span className='text-primary iconfont icontishi relative'></span>
+                <div className='flex  justify-start pl-20px text-base'>
+                    <span  style={{lineHeight: '0.5rem', position: 'relative', 'top': '-0.01rem'}} className='text-primary iconfont icontishi relative'></span>
                     &nbsp;
-                    <div className='text-color_time_count text-base rule-label'>投票规则：</div>&nbsp;
+                    <div className='text-color_time_count text-base rule-label'>{buttonName}规则：</div>&nbsp;
                     {!displayRuleText && <div className='text-color_time_count text-base '>{voteRuleMatching}</div>}
                     {displayRuleText &&
                         <div style={{
+                            color:  ruleTextColor == '#0076ff' ? '': ruleTextColor,
                             whiteSpace: 'pre-line'
-                        }} className={`text-color_time_count text-base`}>
+                        }} className={`text-color_time_count text-base ${ruleTextSizeName}`}>
                             {ruleText}
                         </div>}
                 </div>
-                {ruleTextPlugin && <div className='flex item-center justify-start pl-20px text-base'>
+                {ruleTextPlugin && <div className='flex items-center justify-start pl-20px text-base'>
                     <span className='text-primary iconfont icontishi relative'></span>
                     &nbsp;
                     <div className='text-color_time_count text-base rule-label'>活动说明：</div>&nbsp;
                     <div style={{
                         whiteSpace: 'pre-line',
-                        color: ruleTextPluginColor
+                        color: ruleTextPluginColor == '#0076ff' ? '': ruleTextPluginColor
                     }}
                         className={`text-color_time_count ${ruleTextPluginSizeName}`}>{ruleTextPlugin}</div>
                 </div>}

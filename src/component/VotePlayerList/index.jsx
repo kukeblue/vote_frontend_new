@@ -49,6 +49,8 @@ export default function VotePlayerList({
     const playerIntroShowType = useSettingStore((state) => state.activitySetting.player_intro_show_type.values)
     const groups = usePlayerStore((state) => state.groups)
     const { show_all_group } = useSettingStore((state) => state.activitySetting.vote_page.values)
+    const open_subscription = useSettingStore((state) => state.activitySetting.open_subscription.values)
+
     const [styleLoading, setStyleLoading] = useState(true)
 
     useEffect(() => {
@@ -133,7 +135,7 @@ export default function VotePlayerList({
                 </div>}
                 {showVoteButton && <div className='mt-0.25rem flex justify-center w-full'>
                     <div className={`${isSelectedPlayer ? 'bg-gray text-white' : 'text-white bg-primary'} rounded-5px  text-base  w-3/5 h-0.9rem flex items-center justify-center text-center p-votePlayerList-button`}>
-                        <CheckWechat onClick={handleClickVote} parameters={[item]}> {isSelectedPlayer ? '已选择' : buttonName} </CheckWechat>
+                        <CheckWechat onClick={handleClickVote} openSubscription={open_subscription} parameters={[item]}> {isSelectedPlayer ? '已选择' : buttonName} </CheckWechat>
                     </div>
                 </div>}
             </div>

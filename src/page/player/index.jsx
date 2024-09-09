@@ -66,7 +66,7 @@ export default function Player() {
 	const columns = vote_item_pic_array_type == 2 ? 2 : 1
 
 	useEffect(() => {
-		let shareTitle = shareItemTitle.replace('{number}', playerInfo.number)
+		let shareTitle = shareItemTitle.replace('{number}', playerInfo.short_number || playerInfo.number)
 		shareTitle = shareTitle.replace('{name}', playerInfo.name)
 		console.log(shareTitle)
 		setShareConfig(shareTitle, getImageByCode(playerInfo.cover))
@@ -217,7 +217,7 @@ export default function Player() {
 				</div>
 			}
 			<div className='p-PlayerPage-name-block'>
-				{show_number_in_detail && <div className='text-center p-PlayerPage-number'>{playerInfo.number}号</div>}
+				{show_number_in_detail && <div className='text-center p-PlayerPage-number'>{ playerInfo.short_number || playerInfo.number}号</div>}
 				{show_vote_item_name_in_detail && <div className='text-common text-center mt-0.01rem p-PlayerPage-name'>
 				 	 { playerInfo.name}
 				</div>}
@@ -335,10 +335,11 @@ export default function Player() {
 			<CanvasSwiperModal
 				onClose={() => setShowCanvasSwiperModal(false)}
 				playerName={playerInfo.name}
-				playerNo={playerInfo.number}
+				playerNo={playerInfo.short_number || playerInfo.number}
 				playerDec={playerInfo.introduction}
 				title={activityTitle}
 				playerImage={getImageByCode(playerInfo.cover)}
+				buttonName={buttonName}
 			/>}
 	</div>
 }

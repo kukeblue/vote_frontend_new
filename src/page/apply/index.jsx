@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback, useRef } from 'react'
+import CryptoJS from 'crypto-js'
 import './index.less'
 import { ImageViewer, Form, Input, ImageUploader, Picker, Button, TextArea, Toast, Dialog, Space, Image, Radio } from 'antd-mobile'
 import usePlayerStore from '../../store/playerStore'
 import useSettingStore from '../../store/settingStore'
 import axios from 'axios';
-import { getImageByCode } from '../../utils/format'
+import { formatTime, getImageByCode } from '../../utils/format'
 import { doApply, fetchApplyStatus } from '../../api'
 import CheckWechat from '../../component/CheckWechat'
 import { LinkOutline } from 'antd-mobile-icons'
@@ -18,6 +19,8 @@ import { C_ApplyDownloadAttachment, C_ApplyInputPlaceholders } from './custom'
 import { RightOutline } from 'antd-mobile-icons'
 export default () => {
 	const [showGroupPicker, setShowGroupPicker] = useState(false)
+	const [showApplyPicker, setShowApplyPicker] = useState(false)
+
 	const groups = usePlayerStore((state) => state.groups)
 	const [selectedGroup, setSelectedGroup] = useState()
 	const enrollNameInput = useSettingStore((state) => state.activitySetting.enroll_name_input.values)
@@ -34,10 +37,33 @@ export default () => {
 	const activityId = useSettingStore((state) => state.activityId)
 	const openid = useSettingStore((state) => state.openid)
 	const [applyResult, setApplyResult] = useState()
+	const [applyResults, setApplyResults] = useState([])
+
+	const useDebounce = (callback, delay) => {
+		const timer = useRef(null);
+	
+		const debouncedCallback = useCallback((...args) => {
+			if (timer.current) {
+				clearTimeout(timer.current);
+			}
+			timer.current = setTimeout(() => {
+				callback(...args);
+			}, delay);
+		}, [callback, delay]);
+	
+		return debouncedCallback;
+	};
 
 	const [form] = Form.useForm()
+
+	const handleSubmitDebounce = useDebounce(() => {
+		console.log('防抖提交')
+        handleSubmit()
+    }, 300); // 300ms 防抖
+
 	const handleSubmit = async () => {
 		try {
+
 			const values = await form.validateFields(); // 触发表单验证
 			// 这里可以添加表单提交到服务器的代码
 
@@ -78,12 +104,7 @@ export default () => {
 						confirmText: "确认",
 						content: '提交报名成功',
 						onConfirm: () => {
-							fetchApplyStatus(activityId, openid).then(res => {
-
-								if (res.code == 0) {
-									setApplyResult(res.data)
-								}
-							})
+							location.reload()
 						},
 					})
 
@@ -105,6 +126,19 @@ export default () => {
 		}
 	}
 
+	const handleApplyHistory = (v) => {
+		if (v && v[0]) {
+			let selectedApply = applyResults.find(item => {
+				return item.id == v[0]
+			})
+			setApplyResult(selectedApply)
+		}
+		setShowApplyPicker(false)
+	}
+	const groupMap = {}
+	groups.map(item=>{
+		groupMap[item.id] = item.name
+	})
 	const handleSelectGroup = (v) => {
 
 		if (v && v[0]) {
@@ -156,7 +190,6 @@ export default () => {
 		};
 
 		let res = await axios(config);
-
 		if (res.status == 200) {
 			return {
 				url: getImageByCode(res.data.data.filename)
@@ -164,6 +197,10 @@ export default () => {
 		} else {
 			return false;
 		}
+	}
+
+	const handleApplyAgain = () => {
+		setApplyResult(null)
 	}
 
 	useEffect(() => {
@@ -176,14 +213,22 @@ export default () => {
 		if (activityId && openid) {
 
 			fetchApplyStatus(activityId, openid).then(res => {
-
 				if (res.code == 0) {
-					setApplyResult(res.data)
+					if(res.data.length == 0) {
+						setApplyResults([])
+					}else {
+						setApplyResults(res.data)
+						setApplyResult(res.data[0])
+					}
 				}
 			})
 		}
 	}, [activityId, openid])
 	const groupsPickerData = groups.filter(item => item && item.id != 'all').map(item => {
+		return { label: item.name, value: item.id }
+	})
+
+	const applyPickerData = applyResults.filter(item => item && item.id != 'all').map(item => {
 		return { label: item.name, value: item.id }
 	})
 
@@ -228,11 +273,11 @@ export default () => {
 	return <div className='apply-page w-full'>
 		<div className='p-4 text-color_time_count'>
 			<div className='flex mb-3px'>
-				<div className='flex item-center'><span className='iconfont icontime relative top-[0.02rem]'></span>&nbsp;<span className='text-common'>报名开始</span></div>
+				<div className='flex items-center'><span className='iconfont icontime relative top-[0.02rem]'></span>&nbsp;<span className='text-common'>报名开始</span></div>
 				<div className='pl-10px text-common'>{enrollStartAt}</div>
 			</div>
 			<div className='flex'>
-				<div className='flex item-center'><span className='iconfont icontime relative top-[0.02rem]'></span>&nbsp;<span className='text-common'>报名截止</span></div>
+				<div className='flex items-center'><span className='iconfont icontime relative top-[0.02rem]'></span>&nbsp;<span className='text-common'>报名截止</span></div>
 				<div className='pl-10px text-common'>{enrollStartEnd}</div>
 			</div>
 		</div>
@@ -258,21 +303,37 @@ export default () => {
 					</div>
 					<div className='mt-5px text-base text-left text-color_time_count'>附件说明：提交下面基本信息报名成功后，请下载附件填写详细信息后发送到邮箱xxxxxxxx</div>
 				</Form.Item>}
-				{applyResult && <Form.Item layout='horizontal' label='报名状态'>
+				{applyResult && <Form.Item layout='horizontal' label='报名历史'>
 					<div className='flex items-center justify-between '>
-						<Input placeholder= ''/>
+						<Picker onCancel={()=>setShowApplyPicker(false)} onConfirm={handleApplyHistory} visible={showApplyPicker} columns={[applyPickerData]}></Picker>
+						<Input disabled placeholder= ''/>
 						<Button
-							color="warning"
+							onClick={() => {
+								setShowApplyPicker(true)
+							}}
 							size='small'
 							className='w-100px'
 						>
-							审核中
+								<DownOutline />
+								<span className='text-base'>查看</span>
+						</Button>
+					</div>
+				</Form.Item>}
+				{applyResult && <Form.Item layout='horizontal' label='报名状态'>
+					<div className='flex items-center justify-between '>
+						<Input disabled placeholder= ''/>
+						<Button
+							color={applyResult.state == 1? "success" : (applyResult.state == 0 ? "warning" : "danger")}
+							size='small'
+							className='w-150px'
+						>
+							{applyResult.state == 0 ?'审核中': (applyResult.state == 1? '报名成功':'审核失败')}
 						</Button>
 					</div>
 				</Form.Item>}
 				<Form.Item layout='horizontal' label='分组'>
 				{!applyResult ? <div className='flex items-center justify-between '>
-						<Picker onConfirm={handleSelectGroup} visible={showGroupPicker} columns={[groupsPickerData]}></Picker>
+						<Picker onCancel={()=>setShowGroupPicker(false)} onConfirm={handleSelectGroup} visible={showGroupPicker} columns={[groupsPickerData]}></Picker>
 						<Input value={selectedGroup && selectedGroup.name} placeholder='请选择分组' />
 						<Button
 							size='small'
@@ -286,7 +347,7 @@ export default () => {
 								<span className='text-base'>选择</span>
 							
 						</Button>
-					</div>: selectedGroup && selectedGroup.name}
+					</div>: groupMap[applyResult.group_id]}
 				</Form.Item>
 				<Form.Item
 					rules={[{ required: true, message: enrollNameInput.text + '不能为空' }]}
@@ -316,8 +377,8 @@ export default () => {
 							rules={[{ required: item.attribute == 2, message: item.text + '不能为空' }]}
 							layout={item.type == "textarea" ? "vertical" : 'horizontal'} key={i} label={item.text} name={item.name}>
 							{applyResult ? applyResult[item.name] :
-								<Radio.Group >
-									<Space direction='vertical'>
+								<Radio.Group  >
+									<Space direction='horizontal'>
 										{item.options && item.options.map(item => {
 											return <Radio key={item} value={item}>{item}</Radio>
 										})}
@@ -377,7 +438,7 @@ export default () => {
 									upload={handleUpload}
 									multiple
 									maxCount={3}
-								/> : <div className='m-t-1 flex'>
+								/> : <div className='m-t-1 flex' style={{flexWrap: 'wrap'}}>
 									{
 										applyResult[item.name] && applyResult[item.name].split(",").map(item => {
 											return <Image className='m-l-5px' onClick={()=>{
@@ -401,16 +462,17 @@ export default () => {
 
 				{openImageEnroll && <Form.Item
 					rules={[{ required: true, message: '请上传' + enrollPicName }]}
-					name='images' label={enrollPicName + '上传'}>
+					name='images' label={<div>{enrollPicName + '上传'} 
+					<span style={{marginLeft: '10px'}} className='text-color_dec text-small'>最少上传{enrollPicImageAtLeast}张, 最多上传{enrollPicImageAtMost}张{enrollPicName}</span></div>}>
 					{!applyResult ? <ImageUploader
 						className='m-t-2 mx-0.5'
 						upload={handleUpload}
 						multiple
 						maxCount={enrollPicImageAtMost}
 						beforeUpload={beforeUpload}
-					/> : <div className='m-t-1 flex'>
+					/> : <div className='m-t-1 flex'  style={{flexWrap: 'wrap'}}>
 						{
-							applyResult.covers.map(item => {
+							applyResult && applyResult.covers && applyResult.covers.map(item => {
 								return <Image className='m-l-5px' onClick={()=>{
 									ImageViewer.show({
 										image: getImageByCode(item),
@@ -431,9 +493,16 @@ export default () => {
 			</Form>
 			<br />
 			<br />
+			{applyResult && <div className='flex justify-center w-full px-20px'>
+				<CheckWechat
+					onClick={()=>{handleApplyAgain()}} parameters={[]}
+				><Button block color='primary' size='middle'>
+						<span className='text-common'>再次报名</span>
+					</Button></CheckWechat>
+			</div>}
 			{!applyResult && <div className='flex justify-center w-full px-20px'>
 				<CheckWechat
-					onClick={handleSubmit} parameters={[]}
+					onClick={handleSubmitDebounce} parameters={[]}
 				><Button block color='primary' size='middle'>
 						<span className='text-common'>提交报名</span>
 					</Button></CheckWechat>

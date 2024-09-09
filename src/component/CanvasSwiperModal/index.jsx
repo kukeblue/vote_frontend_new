@@ -14,7 +14,8 @@ export default function CanvasSwiperModal({
     playerDec = "选手简介",
     title = "活动名称",
     onClose=()=>{},
-    playerImage = "https://upload.cyuandao.com/2020091907450415640.jpg"
+    playerImage = "https://upload.cyuandao.com/2020091907450415640.jpg",
+    buttonName="投票"
 }) {
 
     const banners = useSettingStore((state) => state.activitySetting.banners.values)
@@ -79,11 +80,11 @@ export default function CanvasSwiperModal({
                         <div className="player-no" >
                             <p className='offset-font'>{playerNo}号</p>
                         </div>
+                        <div className="player-img">
                         <img
-                            className="player-img"
                             src={playerImage}
                             crossOrigin="anonymous"
-                        />
+                        /></div>
                     </div>
                     <div className="content-ctn">
                         <div className="player-name">
@@ -114,7 +115,7 @@ export default function CanvasSwiperModal({
                         <div className="cf-left">
                             <p className="des">长按识别二维码</p>
                             <div className="footer-vote-btn">
-                                <p className='offset-font'>帮我投票</p>
+                                <p className='offset-font'>帮我{buttonName}</p>
                             </div>
                         </div>
                         <div className="qrDom-box">
@@ -149,7 +150,7 @@ export default function CanvasSwiperModal({
                     <div className="cf-left">
                         <p className="des">长按识别二维码</p>
                         <div className="footer-vote-btn">
-                            <p className='offset-font'>帮我投票</p>
+                            <p className='offset-font'>帮我{buttonName}</p>
                         </div>
                     </div>
                     <div className="qrDom-box">
@@ -178,7 +179,7 @@ export default function CanvasSwiperModal({
                                 </div>
                             </div>
                             <div className="r-text">
-                                长按识别二维码进入投票页面为我投票，谢谢
+                                长按识别二维码进入{buttonName}页面为我{buttonName}，谢谢
                             </div>
                         </div>
                     </div>
@@ -247,7 +248,7 @@ export default function CanvasSwiperModal({
                         <div className="cf-left">
                             <p className="des">长按识别二维码</p>
                             <div className="footer-vote-btn">
-                            <p className='offset-font'>请为TA投票</p>
+                            <p className='offset-font'>请为TA{buttonName}</p>
                                 </div>
                         </div>
                     </div>
@@ -297,7 +298,7 @@ export default function CanvasSwiperModal({
                         <div className="cf-left">
                             <p className="des">长按识别二维码</p>
                             <div className="footer-vote-btn">
-                                <p className='offset-font'>请为TA投票</p>
+                                <p className='offset-font'>请为TA{buttonName}</p>
                             </div>
                         </div>
                     </div>

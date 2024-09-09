@@ -48,7 +48,7 @@ export default function TabBar() {
     let pageType = ''
     let pathType = ''
     // 
-    // let tempId = 'chuangzihao'
+    // let tempId = 'kejijinrong'
     console.log('tempId', tempId)
     const showTabImage = (tempId == 'default')? false : true
     const CustomTextMap= CustomTexts.VoteSearchCard[activityId] || CustomTexts.VoteSearchCard.default
@@ -114,11 +114,12 @@ export default function TabBar() {
             ),
         })
     }
-
+    const sortedArray = [...tabs].sort((a, b) => a.sort - b.sort);
+    console.log(sortedArray)
     return <div className='pt-10px w-full h-1.8rem bg-white tab-bar absolute bottom-0 left-0 px-0.2rem p-tabBar'>
         <Grid columns={tabs.length} gap={8}>
             {
-                tabs.map(item => {
+                sortedArray.map(item => {
 
                     if (item.code == 'search') {
                         return <Grid.Item key={item.code} onClick={()=>handleClickSearch()} className='tab-item flex flex-col items-center'>
@@ -129,7 +130,7 @@ export default function TabBar() {
                         </Grid.Item>
                     }
                     if (item.code == 'custom') {
-                        return <Grid.Item className='flex flex-col items-center'>
+                        return <Grid.Item key={item.code} className='flex flex-col items-center'>
                             <div onClick={() => handleClickCustom(item)} className='text-primary text-icon_tab leading-icon_tab iconfont iconweixin'></div>
                             <div onClick={() => handleClickCustom(item)} className='text-base text-primary'>{item.name}</div>
                         </Grid.Item>

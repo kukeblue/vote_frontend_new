@@ -15,6 +15,9 @@ const useSettingStore = create((set) => (
     activityEndTime: '',
     activityTitle: '',
     activitySetting: {
+      open_subscription: {
+        values: false
+      },
       per_wx_vote_num: { values: 1 },
       player_name_show_type: { values: 1 },
       player_intro_show_type: { values: 1 },
@@ -216,7 +219,7 @@ const useSettingStore = create((set) => (
       // 设置模版
       const tempId = response.data.view_nid
       const link = document.createElement('link');
-      link.href = `/public/themes_011/${tempId}.css`;
+      link.href = `/public/themes_014/${tempId}.css`;
       link.type = 'text/css';
       link.rel = 'stylesheet';
 

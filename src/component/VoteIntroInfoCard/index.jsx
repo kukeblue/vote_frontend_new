@@ -101,7 +101,7 @@ export default function VoteIntroInfoCard({
         }
     }
     return <div className='w-full pl-15px pr-15px pt-10px '>
-        <div className=' bg-white w-full rounded-10px p-10px p-voteIntroInfoCard-block'>
+        <div style={{display: (showName || showStatistics || showVoteTime)? '': 'none'}} className=' bg-white w-full rounded-10px p-10px p-voteIntroInfoCard-block'>
             {showName && <div className='text-color_title text-center font-medium text-lg voteIntroInfoCard-title'>
                 {activityTitle}
             </div>}
@@ -125,7 +125,7 @@ export default function VoteIntroInfoCard({
                 <div className='p-voteIntroInfoCard-timer-wrap'>
                 <span className='p-voteIntroInfoCard-timer-before'></span>
                 <span className='p-voteIntroInfoCard-timer-text'>
-                    投票 <span className='text-primary'>{timeData.status}</span> 倒计时
+                    活动 <span className='text-primary'>{timeData.status}</span> 倒计时
                     <span className='text-primary'>{timeData.day}</span>天
                     <span className='text-primary'>{timeData.hour}</span>时
                     <span className='text-primary'>{timeData.min}</span>分

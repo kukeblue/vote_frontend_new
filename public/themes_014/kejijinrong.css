@@ -1,0 +1,468 @@
+.p-tabBar {
+    background-color: #001282;
+}
+.tab-text_fill {
+    color: #4bdef8;
+}
+.tab-item {
+    opacity: .5;
+}
+.p-playerPage-vote-block {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    padding-left: 0.2rem;
+}
+
+.p-player-content-block div {
+    background-color: transparent;
+    color:  #00adef !important;
+}
+
+.p-playerPage-lapiao {
+    /* background: linear-gradient(180deg, #fede70 0%, #ffcb09 100%) !important;
+    border: 0 !important;
+    color: #9d6300 !important;
+    border-radius: 0px;
+    margin-top: 0px; */
+    background-color: transparent;
+    margin-top: 0px;
+}
+
+
+
+.p-playerPage-vote-block>div {
+    border-radius: 0px;
+    width: 46%;
+    background-image: url('/images/bg/kejijinrong/detailBtn.png') !important;
+    background-color: transparent;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.p-PlayerPage-number {
+    color: #3975cc;
+}
+.p-PlayerPage-name {
+    color: #4bdef8;
+}
+.playerPage-player-content {
+    background-color: #001282;
+}
+.VoteIntroPanel {
+    background-color: #001282;
+    color: #4bdef8 !important;
+}
+.VoteIntroPanel span {
+    background-color: #001282;
+    color: #4bdef8 !important;
+}
+.rank-list-item:nth-child(1) {
+    /* display: none !important; */
+}
+.rank-list-item:nth-child(2) {
+    /* display: none !important; */
+    
+}
+.rank-list-item:nth-child(3) {
+    /* display: none !important; */
+    
+}
+.rank-list-item:nth-child(4) {
+    /* display: none !important; */
+    
+}
+.rank-list-item-icon {
+    color: #3975cc;
+}
+.p-rank-page-poll {
+    color: #4bdef8;
+}
+.p-rank-player-intro {
+    color: #ccc;
+}
+.p-rank-page-name {
+    color: #4bdef8;
+}
+.p-rank-page-number {
+    color: #3975cc;
+}
+.rank-list-item img{
+    border-radius: 0px;
+}
+.rank-list-item::after {
+    content: " ";
+    position: absolute;
+    left: 1.28rem;
+    bottom: 0;
+    height: 1px;
+    width: calc(100% - 1.28rem);
+    background-color: #102e98;
+}
+.pecial-rank_item:nth-child(2) {
+    position: relative;
+    top: -1rem;
+}
+.p-voteIntroPanel-block {
+    background: #001282 !important;
+    padding-bottom: .6667rem !important;
+    border-radius: .2133rem !important;
+}
+.rank-list-item {
+    border-radius: 0px;
+    background-image: unset !important;
+    background-color: unset !important;
+}
+
+.p-voteIntroPanel-block > div:nth-child(1) {
+    position: relative !important;
+    top: -0.5rem !important;
+    background: url('/images/bg/kejijinrong/suspension.png') no-repeat center top;
+    background-size: auto 100%;
+    background-color: transparent !important;
+    width: 100% !important;
+    height: 1.4rem !important;
+    /* margin-bottom: .8rem !important; */
+    color: #0ff !important;
+    font-size: .4rem !important;
+    font-weight: 500 !important;
+    padding-top: 0.57rem;
+}
+.pecial-rank_item:nth-child(1) .pecial-rank-shiping{
+    background-image: url("/images/bg/kejijinrong/seconed.png") !important;
+
+    
+}
+.pecial-rank_item:nth-child(2) .pecial-rank-shiping{
+    height: 0.95rem;
+    width: 3rem;
+    left: -0.2rem;
+    background-image: url("/images/bg/kejijinrong/first.png") !important;
+
+}
+.pecial-rank_item:nth-child(3) .pecial-rank-shiping{
+    background-image: url("/images/bg/kejijinrong/third.png") !important;
+
+}
+.pecial-rank-img-wrap {
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+}
+.pecial-rank-img-wrap img{
+    width: 100%;
+}
+.pecial-rank_item {
+    position: relative;
+}
+.shiping-2 {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+.pecial-rank-shiping {
+    width: 100%;
+    height: 0.7rem;
+    position: absolute;
+    top: 2rem;
+}
+.pecial-rank-img {
+    width: 100%;
+    height: 2.8rem;
+    border: 1px solid green;
+}
+.pecial-rank-code {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.15rem;
+    color: #3975cc !important;
+    font-size: .4rem !important;
+}
+.pecial-rank-name {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.15rem;
+    color: #4bdef8;
+    font-size: .4rem !important;
+    font-family: "Source Han Sans CN";
+}
+.pecial-rank-poll {
+    margin-top: 0.15rem;
+    display: flex;
+    justify-content: center;
+    color: #4bdef8;
+    font-size: .4rem !important;
+    font-family: "Source Han Sans CN";
+}
+.special-rank-box {
+    display: block;
+    width: 100%;
+    height: 5.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    background: url('/images/bg/kejijinrong/rankBg.png') no-repeat center top;
+    background-size: 100% 100%;
+}
+.pecial-rank_item {
+    width: 33.33%;
+    height: 100%;
+}
+.p-votePlayerList-button {
+    font-size: 0.4rem !important;
+    width: 3.6533rem !important;
+    background-image: url("/images/bg/kejijinrong/voteBtn1.png") !important;
+    background-size: 100% 100% !important;
+    background-color: transparent !important;
+    height: .9733rem !important;
+    box-sizing: content-box !important;
+    padding: 0 !important;
+    color: #4bdef8 !important;
+}
+.p-votePlayerList-info {
+    color: #fff;
+}
+.p-votePlayerList-name {
+    color: #00adef;
+}
+.p-votePlayerList-poll-block {
+    color: #00adef;
+}
+.p-votePlayerList-item-block {
+    background-color: #001282 !important;
+}
+.p-number-block  span {
+    position: relative !important;
+    min-width: 2rem !important;
+    height: 1.0667rem !important;
+    line-height: 1.0667rem !important;
+    color: #00adef !important;
+    padding: 0 0.2rem !important;
+    background: url('/images/bg/kejijinrong/number.png') no-repeat center !important;
+    background-size: 100% 100% !important;
+    background-color: transparent !important;
+    font-size: 0.4rem !important;
+    padding-top: 0.13rem;
+}
+.p-votePlayerList-image_wrap img{
+    border-radius: 0px;
+}
+.p-number-block {
+    font-size: 0.42rem;
+    display: block;
+    position: relative;
+    height: 1rem;
+    border-radius: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: var(--primary-color);
+}
+
+.p-vote-group-card .bg-primary {
+    background-color: #0ff;
+    color: #001282;
+    border-color: #0ff;
+}
+.p-vote-group-card > div {
+    background-color: transparent;
+}
+.group-item {
+    border-radius: 4px;
+    border: 1px solid #0ff;
+    color: #fff;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.p-vote-group-card > div:first-child {
+    border-radius: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+
+}
+.p-rank-button {
+    height: 40px;
+    background-color: #001282;
+    border-radius: 0px;
+}
+.p-VoteSearchCard-search-block .bg-input {
+    background-color: #001282;
+
+}
+.p-VoteSearchCard-search-block {
+    border: 2px solid #0ff;
+}
+.p-VoteSearchCard-search-block > div {
+    height: 40px;
+}
+.p-search-button {
+    border-radius: 0px;
+    margin-left: 0px;
+    width: 2.5rem;
+    background-color: #0ff;
+    color: #164da0;
+}
+.p-VoteSearchCard-search-block > div:first-child {
+
+    border-radius: 0px;
+
+}
+.p-VoteSearchCard > div {
+    padding: 0px;
+    background-color: transparent;
+}
+.p-voteIntroRuleCard-block-text > div {
+    margin-bottom: 0.15rem !important;
+}
+.p-voteIntroRuleCard-block-text .iconfont{
+    color: #81ecf4 !important;
+}
+.p-voteIntroRuleCard-block-text .text-base{
+    color: #81ecf4 !important;
+}
+
+.p-voteIntroRuleCard {
+    padding-top: 0px;
+}
+.p-voteIntroRuleCard-block >div:first-child{
+   display: none;
+}
+.p-voteIntroRuleCard-block {
+    padding-top: 0px;
+}
+.p-voteIntroInfoCard-timer-text {
+    position: relative;
+    top: 0.05rem;
+}
+.p-voteIntroInfoCard-timer-wrap {
+    margin-top: 0 !important;
+    width: 8.0533rem !important;
+    height: 1.2rem !important;
+    margin: 0 auto !important;
+    color: #4b95e8 !important;
+    font-size: .3467rem !important;
+    line-height: 1.2rem !important;
+    text-align: center;
+    background-image: url('/images/bg/kejijinrong/countDown.png');
+    background-size: 8.0533rem 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.p-voteIntroInfoCard-timer-block .icontime{
+    display: none;
+
+}
+.p-voteIntroInfoCard-statistics-block > div > div:first-child {
+    line-height: 1;
+    color: #0ff;
+    font-weight: 400;
+    font-size: .45rem;
+    margin-bottom: 0.2rem;
+    text-align: center;
+}
+.p-voteIntroInfoCard-statistics-block > div > div:nth-child(2) {
+    line-height: 1;
+    color: #4b95e8;
+    font-weight: 400;
+    text-align: center;
+}
+.p-voteIntroInfoCard-statistics-block {
+    background-image: url("/images/bg/kejijinrong/voteData.png") !important;
+    background-size: 100% 100%;
+    background-color: transparent !important;
+    background-repeat: no-repeat;
+    padding-top: 1rem;
+    padding-bottom: 0.6rem;
+    height: 3.2rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+.voteIntroInfoCard-title {
+    color: #97f8ff !important;
+}
+.bg-page {
+    background-color: #030c44 !important;
+}
+.p-intro-wrap >div {
+    background-color: transparent !important;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.p-voteIntroInfoCard-block {
+    padding: 0px;
+    background-color: transparent;
+}
+.p-voteIntroRuleCard-block {
+    background-color: transparent;
+}
+
+.p-intro-wrap {
+    background-color: #001282 !important;
+    margin: 0px 10px;
+}
+
+
+
+/* ============================================================================= */
+
+.p-votePlayerList-info {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.p-votePlayerList-name {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.p-votePlayerList-item-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.p-votePlayerList-image_wrap img {
+    object-fit: cover;
+    object-position: top;
+    overflow: hidden;
+}
+
+.p-rank-player-intro {
+    width: 3.8rem;
+}
+.p-player-content-block iframe
+{
+   width: 8.5rem;
+   height: 5rem;
+   position: relative;
+   left: -0.3rem;
+}
+
+.p-rank-name-wrap {
+    display: flex;
+    align-items: center;
+    width: 3.8rem;
+}
+
+.p-rank-page-number {
+    width: 0.76rem
+}
+
+.p-rank-page-name {
+    flex: 1;
+}
+
+.p-votePlayerList-item-content {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+}
+
+.votePlayerList-name {
+    flex: 1;
+}
+.p-playerPage-vote-block_vote {
+    border-radius: 5px !important;
+}
+/* // ------------------------------------ */

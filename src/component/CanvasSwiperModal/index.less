@@ -142,7 +142,6 @@
             .player-no {
                 position: absolute;
                 display: block;
-                width: 1.2rem;
                 height: 0.5333rem;
                 line-height: 0.5333rem;
                 left: 0;
@@ -154,14 +153,18 @@
             .player-img {
                 position: absolute;
                 top: -0.9067rem;
-                left: 50%;
-                transform: translateX(-50%);
+                left: calc(50% - 0.905rem);
+                // transform: translateX(-50%);
                 width: 1.8133rem;
                 height: 1.8133rem;
                 border-radius: 50%;
                 border: 0.0533rem solid #fff;
-                object-fit: contain;
                 overflow: hidden;
+                img {
+                    width: 100%;
+                    height: auto;
+                    object-fit: none;
+                }
             }
         }
         .content-ctn {
@@ -183,13 +186,18 @@
             .ctn-banner {
                 margin-top: 0.3733rem;
                 width: 100%;
-                max-height: 4.8267rem;
+                height: 100%;
+                max-height: 7.4667rem;
+                overflow: hidden;
+                background-repeat: no-repeat;
+                background-size: cover;
                 border-radius: 0.1333rem;
                 overflow: hidden;
                 img {
                     display: block;
-                    width: 100%;
+                    min-width: 100%;
                     height: auto;
+                    object-fit: none;
                 }
             }
             .activity-name {

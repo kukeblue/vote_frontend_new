@@ -26,13 +26,13 @@ export default function ActivityList_20240803() {
     useEffect(()=>{
         fetchWeChatSahreData().then(res => {
             const body = {
-                title: "首届湾区世界美食高质量公评大会评选活动",
+                title: "第二届世界美食创新大会 “广东一桌菜”-粤菜、“湖北一桌菜”-楚菜（湾区）网络评选活动",
                 desc: "活动开始啦！欢迎大家参与投票",
                 link: window.location.href,
-                imgUrl: "https://upload.cyuandao.com/285cbf86-9c7c-4e7b-8b5f-deb94b9053bc1722589876535.jpg",
+                imgUrl: "https://upload.cyuandao.com/2024080723045365935.jpg",
             }
             utils.register(window.wx, res.data, body)
-            document.title = "首届湾区世界美食高质量公评大会评选活动"
+            document.title = "第二届届湾区世界美食高质量公评大会评选活动"
         })
     }, [])
 

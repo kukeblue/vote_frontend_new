@@ -1,0 +1,10 @@
+.p-rank-name-wrap {
+    flex-direction: column;
+    align-items: flex-start;
+}
+.p-rank-page-number {
+    width: 4rem;
+}
+.p-rank-page-name {
+    margin-left: 0px;
+}

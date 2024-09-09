@@ -1,0 +1,357 @@
+html,
+body {
+    font-family: sans-serif;
+}
+
+/* 预先设置 */
+
+.rank-list .rank-list-item {
+    background-image: unset !important;
+    background-color: #fff;
+    border-bottom: 1px dashed #e1e1e1;
+    padding-bottom: 0.3rem;
+    border-radius: 0px;
+}
+
+.p-voteIntroPanel-block> :first-child {
+    display: none;
+}
+
+
+.p-voteIntroPanel-block {
+    position: relative;
+}
+
+.rank-list-item-icon {
+    color: var(--primary-color);
+}
+
+.p-votePlayerList-item-block {
+    display: flex;
+    flex-direction: column;
+}
+.p-rank-name-wrap {
+    display: flex;
+    align-items: center;
+    width: 4.3rem;
+}
+.p-rank-player-intro {
+    width: 4.7rem;
+}
+
+.p-rank-page-number {
+    width: 0.76rem
+}
+
+.p-rank-page-name {
+    flex: 1;
+}
+.p-PlayerPage-name-block {
+    flex-direction: column;
+}
+.p-PlayerPage-name {
+    margin-top: 15px;
+}
+.p-player-content-block {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.p-player-content-block iframe
+{
+   width: 8.5rem;
+   height: 5rem;
+}
+.adm-input-element {
+    color: #333 !important;
+}
+
+.p-votePlayerList-image_wrap img {
+    object-fit: cover;
+    object-position: top;
+    overflow: hidden;
+}
+
+
+.p-votePlayerList-item-content {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important; 
+}
+
+.votePlayerList-name {
+    flex: 1;
+}
+
+/* 预先设置 */
+
+.p-playerPage-vote-block {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 0.1rem;
+}
+
+.p-playerPage-lapiao {
+    margin-top: 0px;
+    height: 0.9rem;
+    border-radius: 20px;
+}
+
+.p-playerPage-vote-block>div {
+    width: 3.8rem;
+    height: 0.9rem;
+    border-radius: 20px;
+
+}
+
+.p-PlayerPage-name-block {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.rank-list-item {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.p-PlayerPage-number {
+    height: .4533rem;
+    color: #fff;
+    line-height: .4533rem;
+    background-color: var(--primary-color);
+    font-size: .3733rem;
+    border-radius: 0.06667rem;
+    border: 0.0267rem solid var(--primary-color);
+    margin-right: 10px;
+}
+
+
+.rank-list .rank-list-item:first-child .rank-list-item-icon {
+    background-image: url(/images/bg/shijiamedia/first-child.png);
+    width: .6667rem !important;
+    height: .8rem !important;
+}
+
+.rank-list .rank-list-item:nth-child(2) .rank-list-item-icon {
+    background-image: url(/images/bg/shijiamedia/list-child.png);
+    width: .6667rem !important;
+    height: .8rem !important;
+}
+
+.rank-list .rank-list-item:nth-child(3) .rank-list-item-icon {
+    background-image: url("/images/bg/shijiamedia/list-child3.png");
+    width: .6667rem !important;
+    height: .8rem !important;
+}
+
+
+.p-voteIntroPanel-block::before {
+    position: absolute;
+    content: "排行榜";
+    width: 3.2rem;
+    height: 0.89667rem;
+    color: #fff;
+    font-size: .4rem;
+    background-color: var(--primary-color);
+    top: 0rem;
+    line-height: .88667rem;
+    text-align: center;
+    border-radius: 0.13333rem 0.13333rem 0.66667rem 0.66667rem;
+    left: calc(50% - 1.6rem);
+}
+
+.p-tabBar {
+    background-color: var(--primary-color);
+}
+
+.p-tabBar div {
+    color: #fff
+}
+
+.tab-text_fill {
+    color: #fff
+}
+
+.tab-item {
+    opacity: .7;
+}
+
+#root {
+    background-color: #f0fafe !important;
+}
+
+.p-votePlayerList-button {
+    border-radius: 20px;
+}
+
+.p-votePlayerList-poll-block {
+    position: absolute;
+    right: 0.2rem;
+    top: 0.15rem;
+    font-size: 0.38rem;
+}
+
+.p-votePlayerList-item-block {
+    padding-top: 0.8rem;
+}
+body a:first-child {
+    display: block !important;
+}
+.p-number-block {
+    border-radius: 0px;
+    padding: 0px 10px;
+    font-size: 0.33rem;
+    top: 0.15rem;
+    border-radius: 2px;
+    background-color: var(--primary-color);
+}
+
+.p-votePlayerList-item-block img {
+    border-radius: 0px;
+}
+
+.p-VoteSearchCard {
+    background-color: transparent;
+}
+
+.p-VoteSearchCard> :first-child {
+    background-color: transparent;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+}
+
+.p-VoteSearchCard-search-block {
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+.p-VoteSearchCard-search-block> :first-child {
+    height: 40px;
+    background-color: transparent;
+    padding: 0px;
+    padding-top: 5px;
+    padding-left: 10px;
+    width: 7rem;
+}
+
+.p-VoteSearchCard-search-block> :last-child {
+    background-color: transparent;
+    color: var(--primary-color);
+}
+
+
+
+.p-voteIntroRuleCard-block> :first-child {
+    /* 在这里添加你的样式 */
+    color: #fff;
+    border-radius: 0.4rem;
+    width: 2.73333rem;
+    height: 0.72333rem;
+    line-height: .77333rem;
+    margin: auto;
+    text-align: center;
+    font-size: .34rem !important;
+    background-color: var(--primary-color);
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAAA7CAQAAAC+5/wNAAAEWklEQVR42u2cPW/cOBCG39ERWAEn4FQYiIsUW2yRn5L/j5QXwIUPSOFCAVTogDEmhb5IkZS0ykYS4XmBXZO0JUj77HyRlEm+AmD0Yuen33Nb0x5TBdVuyhBH545yoOX3VDsqC6AL9TnScpGqdlUWGPNd5hSPi839nWo3jfDmXObYCmNT2ztEWWQ87jI12p1GPbw1djcf7RTl7mrhTdHFofiI2HtX7aR4wjJtx2o7WO8Kb1fZdd5clulbWyjTfD/6dj6WspVZZt+KFwgMJjn6dj6Wpm4zHMGWCwRNVw6Qm2360S6OzcNMCm9nudkmJr05bNPjmqNv5ePJdpvxpJ8RtjjrOLW7/WUQc5a+pXH0r9TuNkgMrijQ4MfWhbQMr10rtKYQXizy0bHa3QY9owCQ4yo3MVtOkOE7aqyZU5kpEkjtbovKoVXgi+T3nyAjwTfU1kgcm4+WoegeI4Pb/fgygLjDN5dXTn8ztBXdZrmf7gZ8GQAQ0zf8GE64VCBY44ruN1RN+nfjG0oFesG/aDAf7dxWo+h+S1Vg7HpP6kJ2Rwif8ITlaMdqc4+Q3FBY3b7o+r52jpi8ExL+QYk8CpDRaGHwGEmB29AZP9OKXtcdT+FhMciRYzRhbrHhXVcOHim5ooSfT7zOle1S9OZDUB0oMfgSGGa8hMOSEC4owW1xp/AOljzh2RtkMF5gYIDhHZ0ftNdxjr54ldxgFwhzM82TZYFs6dSqPy47PeFIOyiFd7io6SZI7t6LsGk2W/VY0ZvkTsUXW35zxWp559B/i4/1jL1hTOGdQiRW5FvjPBkVVeo2z6KeRGzTpb2aU7dFusI7i0rEbM7d5lWPk5MK7xQS080mj/KfH3HAAQrvLIrlmr1q/PRnlRXeOVQOrUjWGVoQ0GzzBJJ8mLeMFQxFaJFW4Z1BrdOcf9Sn9A9TeGdQ4dlcoGCQYnqYxryD5SMJuk4GkEuj2eaJJAWenIER1hum851A7uywVbd5rKi2nvJgGx0x1R2qcdy4aYvCO1otPDfKvXV7VGrUk+jn2KLCO1q5l6xUY2SzLLMbs7flJhvzuv1t44014PT2tolxCDCAyt16RLXAmTozQv1dJglPcpTI4W7DzwGwMP5PCuB0023l7xqjWtw1h0tvjcnBE4PnAZwvAwgS2s3tludV+MqplsJ6DNaIaR1rYjFPCvRbxE38JbkksSuui189ujr+paMaje062x9JwZMSn62Ln8GHSxL47JmVmuq5P6XGLtjFCCUFTwp8Htz86O7tkaTwCVl3sYAOGPB1rhMXyZOBJwbX7rJH+ShtXY6+5gX9PbRWoAPgrTokAw/XCapl14ltj+nvpj7irUWHaVmRCDwpUABBfH0r+Dq76wSDV6Nzj0My8IaHMXx889b119EXPqMaDMbPzce/n/2bCQCQ3HkQKvzgReSVUM239ClQF8WH/ziVhuWVAftaGflOHvfuUetFrH8WlgY8O97FI9+HUT9x/QvvoR0lgXkzLgAAAABJRU5ErkJggg==);
+    background-size: 100% 100%;
+    margin-bottom: 0.4rem;
+    font-weight: 400;
+}
+
+.p-voteIntroRuleCard-block span {
+    /* 在这里添加你的样式 */
+    color: #6c757d !important;
+    font-size: 0.4rem;
+}
+
+.p-voteIntroRuleCard-block .text-color_time_count {
+    /* 在这里添加你的样式 */
+    color: #6c757d ;
+}
+
+
+
+.p-voteIntroRuleCard-block {
+    border-radius: 0px 0px 10px 10px;
+    padding-top: 0px;
+}
+
+.p-voteIntroRuleCard-block {
+    border-radius: 0px 0px 10px 10px;
+    padding-top: 10px;
+}
+
+.p-voteIntroRuleCard {
+    padding-top: 0px;
+}
+
+.p-voteIntroInfoCard-block {
+    border-radius: 10px 10px 0px 0px;
+}
+
+.p-voteIntroInfoCard-timer-block * {
+    color: #333 !important;
+}
+
+.p-voteIntroInfoCard-statistics-block {
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 0.1rem;
+    height: 1.7rem;
+}
+
+.p-voteIntroInfoCard-statistics-block>div {
+    position: relative;
+    border-right: none !important;
+    background-color: var(--primary-color);
+    border-radius: 0.16rem;
+    height: 1.53333rem !important;
+    flex: none !important;
+    width: 31% !important;
+    color: #fff;
+}
+
+.p-voteIntroInfoCard-statistics-block>div>div {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+}
+
+.p-voteIntroInfoCard-statistics-block>div::before {
+    position: absolute;
+    content: "";
+    width: 0.16rem;
+    height: 0.16rem;
+    background-color: #fff;
+    border-radius: 50%;
+    left: 0.10667rem;
+    top: 0.10667rem;
+    z-index: 2;
+}
+
+.p-voteIntroInfoCard-statistics-block>div::after {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color) !important;
+    opacity: .3;
+    content: "";
+    -webkit-transform: rotate(5deg);
+    -ms-transform: rotate(5deg);
+    transform: rotate(5deg);
+    -webkit-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    transform-origin: 0 0;
+    left: 0.13333rem;
+    top: -0.08rem;
+    border-radius: 0.13333rem;
+    z-index: 0;
+}

@@ -60,7 +60,8 @@ function UserLayout(props) {
       // domain = 'brkexq'https://newnvp.fvwboxx.cn/vote
       // foaa1t.fvwboxx.cnhttps://.fvwboxx.cn/vote
       //https://newnvp.fvwboxx.cn/vote
-      domain = 'dzfvyv'
+      domain = 'llyfrq'
+      
     }
   }
 

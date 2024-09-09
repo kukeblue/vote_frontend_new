@@ -19,6 +19,9 @@ import Article from './page/article'
 import ActivityList from './page/activityList';
 import ActivityList_20240803 from './page/activitylist/activitylist_20240803'
 
+import H5_0830 from './page/h5/0830'
+
+
 
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
@@ -75,9 +78,10 @@ const App = () => (
     <AliveScope>
       <Routes>
         {/* 单独的路由不使用 DefaultLayout */}
+        <Route path="/h5_0830" element={<H5_0830 />} />
         <Route path="/activityList" element={<ActivityList />} />
         <Route path="/activityList_20240803" element={<ActivityList_20240803 />} />
-
+        
 
         {/* 使用 DefaultLayout 的路由 */}
         <Route path="/" element={<DefaultLayout />}>

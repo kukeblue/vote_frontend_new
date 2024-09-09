@@ -21,7 +21,7 @@ export default function VoteIntroPanel({
     }
     news = news.filter(item=>item.show == 0)
 
-    return showNews && <div className='w-full pl-15px pr-15px pt-10px p-VoteIntroPanel-wrap'>
+    return showNews && introText && <div className='w-full pl-15px pr-15px pt-10px p-VoteIntroPanel-wrap'>
         <div className='bg-white w-full rounded-10px py-0.5rem px-0.7rem VoteIntroPanel'>
             {news.length > 0 && <div className='voteIntroPanel-header flex flex-row-between'>
                 <div onClick={() => setSelectedType(1)} className={`pr-20px voteIntroPanel-header-item ${selectedType == 1 ? 'active' : ''}`}> 活动介绍</div>

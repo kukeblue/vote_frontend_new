@@ -3,7 +3,14 @@ import utils from '../utils/common'
 import { JSEncrypt } from "js-encrypt"
 
 
-
+// 获取选手排名
+export function fetchAverageData(activity_id) {
+    return post({
+        url: '/api/activity/get_activity_average/6689ec7e752ff48cb2eac17f',
+        data: {
+        }
+    })
+}
 
 // 获取选手排名
 export function fetchPlayerData(activity_id, player_id) {

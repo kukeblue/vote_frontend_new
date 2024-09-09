@@ -5,7 +5,7 @@ import utils from '../utils/common'
 import useSettingStore from './settingStore'
 import { getObCache } from '../utils/cache'
 
-
+let loadingToast = null
 const usePlayerStore = create((set, get) => (
 	{
 		
@@ -80,6 +80,13 @@ const usePlayerStore = create((set, get) => (
 			const { headimgurl, nickname, openid } = wechatUser
 			const playerIds = state.selectedPlayers.map(item => item.id)
 			console.log('captchaId', captchaId)
+
+			loadingToast = Toast.show({
+				icon: 'loading',
+				content: 'loading…',
+				duration: 3000
+			})
+
 			doVote({
 				token: captchaId || window.captchaToken,
 				activityId,
@@ -92,9 +99,12 @@ const usePlayerStore = create((set, get) => (
 				dots,
 				captcha_key: captchaId,
 			}).then(res => {
-				
+				loadingToast.close()
 				const state = get()
 				if (res.code == 0) {
+					if(activityId == '6689ec7e752ff48cb2eac17f') {
+						res.msg = res.msg.replace('投票', '评分')
+					}
 					state.setVoteResult({
 						status: "success",
 						text: res.msg
@@ -210,6 +220,9 @@ const usePlayerStore = create((set, get) => (
 					break;
 				case 3:
 					order_type = 'time_desc'
+					break
+				case 4:
+					order_type = 'short_number_asc'
 					break
 			}
 			const state = get()
